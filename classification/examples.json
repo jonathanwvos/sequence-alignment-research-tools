@@ -1,0 +1,2561 @@
+[
+  {
+    "schema_version": "1.0",
+    "record_id": "hirschberg1975-algorithm-c",
+    "paper_key": "hirschberg1975",
+    "work": {
+      "title": "A Linear Space Algorithm for Computing Maximal Common Subsequences",
+      "year": 1975,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "Algorithm C: one LCS",
+      "stage": "reconstruction",
+      "realization": "paper",
+      "configuration_notes": "Algorithm B is a separate score-vector subroutine; this record does not claim all LCS strings."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "hirschberg1975"
+    ],
+    "claims": [
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_sequence"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "hirschberg1975"
+        ],
+        "locator": "Algorithm C and linear-space analysis",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "objective.problem",
+        "values": [
+          "lcs"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "hirschberg1975"
+        ],
+        "locator": "Algorithm C and linear-space analysis",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "entity_cmp.family",
+        "values": [
+          "equality"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "hirschberg1975"
+        ],
+        "locator": "Algorithm C and linear-space analysis",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "sequence_cmp.family",
+        "values": [
+          "lcs_length"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "hirschberg1975"
+        ],
+        "locator": "Algorithm C and linear-space analysis",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "solver.family",
+        "values": [
+          "dynamic_programming"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "hirschberg1975"
+        ],
+        "locator": "Algorithm C and linear-space analysis",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.layout",
+        "values": [
+          "divide_conquer"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "hirschberg1975"
+        ],
+        "locator": "Algorithm C and linear-space analysis",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "trace.method",
+        "values": [
+          "divide_conquer"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "hirschberg1975"
+        ],
+        "locator": "Algorithm C and linear-space analysis",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.kind",
+        "values": [
+          "one_subsequence"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "hirschberg1975"
+        ],
+        "locator": "Algorithm C and linear-space analysis",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.completeness",
+        "values": [
+          "one_optimum"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "hirschberg1975"
+        ],
+        "locator": "Algorithm C and linear-space analysis",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": "Maximize subsequence length under symbol equality.",
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": "One longest common subsequence. Tied optimal strings are not exhaustively enumerated.",
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T05",
+      "T06",
+      "T08",
+      "T11",
+      "T12"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "fredman1975-length",
+    "paper_key": "fredman1975",
+    "work": {
+      "title": "On Computing the Length of Longest Increasing Subsequences",
+      "year": 1975,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "LIS length for distinct ordered elements",
+      "stage": "sequence_scoring",
+      "realization": "paper",
+      "configuration_notes": "Single-sequence problem under the paper's distinct-element assumption."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "fredman1975"
+    ],
+    "claims": [
+      {
+        "dimension": "task.arity",
+        "values": [
+          "single_sequence"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "fredman1975"
+        ],
+        "locator": "Problem definition and length/comparison bounds",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "entity.alphabet",
+        "values": [
+          "ordered"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "fredman1975"
+        ],
+        "locator": "Problem definition and length/comparison bounds",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "entity_cmp.family",
+        "values": [
+          "ordering"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "fredman1975"
+        ],
+        "locator": "Problem definition and length/comparison bounds",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "sequence_cmp.family",
+        "values": [
+          "lis_length"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "fredman1975"
+        ],
+        "locator": "Problem definition and length/comparison bounds",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "objective.problem",
+        "values": [
+          "lis"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "fredman1975"
+        ],
+        "locator": "Problem definition and length/comparison bounds",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.kind",
+        "values": [
+          "length"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "fredman1975"
+        ],
+        "locator": "Problem definition and length/comparison bounds",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.completeness",
+        "values": [
+          "score_only"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "fredman1975"
+        ],
+        "locator": "Problem definition and length/comparison bounds",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "resource.model",
+        "values": [
+          "comparison"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "fredman1975"
+        ],
+        "locator": "Problem definition and length/comparison bounds",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": "Length of a longest strictly increasing subsequence of a sequence of distinct ordered elements.",
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T29",
+      "T32"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "masek1980-lcs-specialization",
+    "paper_key": "masek1980",
+    "work": {
+      "title": "A Faster Algorithm Computing String Edit Distances",
+      "year": 1980,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "Score computation with LCS cost specialization",
+      "stage": "sequence_scoring",
+      "realization": "paper",
+      "configuration_notes": "Classify the 1980 journal version. Reconstruction is a different output configuration with a different space claim."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "masek1980"
+    ],
+    "claims": [
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_sequence"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "masek1980"
+        ],
+        "locator": "Sections 2.3–2.4 and Section 3, LCS specialization",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "entity.alphabet",
+        "values": [
+          "fixed_finite"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "masek1980"
+        ],
+        "locator": "Sections 2.3–2.4 and Section 3, LCS specialization",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "objective.problem",
+        "values": [
+          "edit_distance",
+          "lcs"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "masek1980"
+        ],
+        "locator": "Sections 2.3–2.4 and Section 3, LCS specialization",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "sequence_cmp.family",
+        "values": [
+          "edit_distance"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "masek1980"
+        ],
+        "locator": "Sections 2.3–2.4 and Section 3, LCS specialization",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "solver.family",
+        "values": [
+          "dynamic_programming",
+          "four_russians"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "masek1980"
+        ],
+        "locator": "Sections 2.3–2.4 and Section 3, LCS specialization",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.layout",
+        "values": [
+          "tabulated"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "masek1980"
+        ],
+        "locator": "Sections 2.3–2.4 and Section 3, LCS specialization",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "scoring.gap",
+        "values": [
+          "unit"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "masek1980"
+        ],
+        "locator": "Sections 2.3–2.4 and Section 3, LCS specialization",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.kind",
+        "values": [
+          "score"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "masek1980"
+        ],
+        "locator": "Sections 2.3–2.4 and Section 3, LCS specialization",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.completeness",
+        "values": [
+          "score_only"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "masek1980"
+        ],
+        "locator": "Sections 2.3–2.4 and Section 3, LCS specialization",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": "d(A,B)=|A|+|B|-2*LCS_length(A,B) for the stated cost specialization.",
+      "scoring_parameters": "Insertion/deletion cost 1; match 0; substitution 2. Fixed finite alphabet; use the paper's discrete-cost assumptions.",
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": "Edit score, convertible to LCS length by the stated identity; not an LCS witness.",
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T05",
+      "T12",
+      "T30"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "gotoh1982-affine-scoring",
+    "paper_key": "gotoh1982",
+    "work": {
+      "title": "An Improved Algorithm for Matching Biological Sequences",
+      "year": 1982,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "Affine-gap score recurrence",
+      "stage": "sequence_scoring",
+      "realization": "paper",
+      "configuration_notes": "This partial record covers score computation. Traceback fidelity, initialization and corrections need their own specification review."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "gotoh1982"
+    ],
+    "claims": [
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_sequence"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "gotoh1982"
+        ],
+        "locator": "Affine gap recurrence and auxiliary states",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "task.role",
+        "values": [
+          "alignment"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "gotoh1982"
+        ],
+        "locator": "Affine gap recurrence and auxiliary states",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "objective.problem",
+        "values": [
+          "weighted_alignment"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "gotoh1982"
+        ],
+        "locator": "Affine gap recurrence and auxiliary states",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "solver.family",
+        "values": [
+          "dynamic_programming"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "gotoh1982"
+        ],
+        "locator": "Affine gap recurrence and auxiliary states",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.state",
+        "values": [
+          "grid"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "gotoh1982"
+        ],
+        "locator": "Affine gap recurrence and auxiliary states",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "scoring.gap",
+        "values": [
+          "affine"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "gotoh1982"
+        ],
+        "locator": "Affine gap recurrence and auxiliary states",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.kind",
+        "values": [
+          "score"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "gotoh1982"
+        ],
+        "locator": "Affine gap recurrence and auxiliary states",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T05",
+      "T09",
+      "T10",
+      "T11"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "rle2019-edit-score",
+    "paper_key": null,
+    "work": {
+      "title": "RLE edit distance in near optimal time",
+      "year": 2019,
+      "version": "arXiv:1905.01254v1",
+      "resource_type": "preprint"
+    },
+    "variant": {
+      "name": "Edit distance on two RLE strings",
+      "stage": "sequence_scoring",
+      "realization": "paper",
+      "configuration_notes": "Abstract-level capability record; no assumption about traceback support."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "rle2019"
+    ],
+    "claims": [
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_sequence"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "rle2019"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "storage.scheme",
+        "values": [
+          "rle"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "rle2019"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "storage.compute_domain",
+        "values": [
+          "direct_compressed"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "rle2019"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "objective.problem",
+        "values": [
+          "edit_distance"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "rle2019"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "sequence_cmp.family",
+        "values": [
+          "edit_distance"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "rle2019"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.kind",
+        "values": [
+          "score"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "rle2019"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "resource.parameter",
+        "values": [
+          "run_counts"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "rle2019"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [
+      {
+        "phase": "kernel",
+        "measure": "time",
+        "bound": "O(rA*rB*log(rA*rB))",
+        "parameters": {
+          "rA": "number of runs in first string",
+          "rB": "number of runs in second string"
+        },
+        "assumptions": "Authors use m,n for compressed lengths. This transcription uses rA,rB to avoid confusing them with raw lengths; constant-size cases understood conventionally.",
+        "basis": "explicit",
+        "source_ids": [
+          "rle2019"
+        ],
+        "locator": "Abstract"
+      }
+    ],
+    "test_ids": [
+      "T01",
+      "T02",
+      "T05",
+      "T12"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "graphaligner2020-mapping",
+    "paper_key": "rautiainen2020",
+    "work": {
+      "title": "GraphAligner: Rapid and Versatile Sequence-to-Graph Alignment",
+      "year": 2020,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "Seed-and-extend graph mapping",
+      "stage": "whole_pipeline",
+      "realization": "paper",
+      "configuration_notes": "Do not promote extension-level claims to whole-mapper exactness."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "graphaligner2020"
+    ],
+    "claims": [
+      {
+        "dimension": "task.role",
+        "values": [
+          "read_mapping"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "graphaligner2020"
+        ],
+        "locator": "Abstract and overview of seeding and extension",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_graph"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "graphaligner2020"
+        ],
+        "locator": "Abstract and overview of seeding and extension",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "graph.role",
+        "values": [
+          "input_reference"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "graphaligner2020"
+        ],
+        "locator": "Abstract and overview of seeding and extension",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "heuristic.kind",
+        "values": [
+          "seeding",
+          "banding"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "graphaligner2020"
+        ],
+        "locator": "Abstract and overview of seeding and extension",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "solver.family",
+        "values": [
+          "dynamic_programming",
+          "bit_parallel"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "graphaligner2020"
+        ],
+        "locator": "Abstract and overview of seeding and extension",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T13",
+      "T15",
+      "T17",
+      "T31"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "biwfa2023-alignment",
+    "paper_key": "marcoSola2023",
+    "work": {
+      "title": "Optimal Gap-Affine Alignment in O(s) Space",
+      "year": 2023,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "Bidirectional wavefront alignment",
+      "stage": "reconstruction",
+      "realization": "paper",
+      "configuration_notes": "Keep score-dependent space distinct from raw input/output storage."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "biwfa2023"
+    ],
+    "claims": [
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_sequence"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "biwfa2023"
+        ],
+        "locator": "Abstract and bidirectional wavefront overview",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "objective.problem",
+        "values": [
+          "weighted_alignment"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "biwfa2023"
+        ],
+        "locator": "Abstract and bidirectional wavefront overview",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "scoring.gap",
+        "values": [
+          "affine"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "biwfa2023"
+        ],
+        "locator": "Abstract and bidirectional wavefront overview",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "solver.family",
+        "values": [
+          "wavefront_alignment"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "biwfa2023"
+        ],
+        "locator": "Abstract and bidirectional wavefront overview",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.state",
+        "values": [
+          "score_frontier"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "biwfa2023"
+        ],
+        "locator": "Abstract and bidirectional wavefront overview",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "trace.method",
+        "values": [
+          "divide_conquer"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "biwfa2023"
+        ],
+        "locator": "Abstract and bidirectional wavefront overview",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.kind",
+        "values": [
+          "one_alignment"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "biwfa2023"
+        ],
+        "locator": "Abstract and bidirectional wavefront overview",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "resource.parameter",
+        "values": [
+          "optimal_score"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "biwfa2023"
+        ],
+        "locator": "Abstract and bidirectional wavefront overview",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T05",
+      "T10",
+      "T11",
+      "T12"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "softdtw2017-loss",
+    "paper_key": null,
+    "work": {
+      "title": "Soft-DTW: a Differentiable Loss Function for Time-Series",
+      "year": 2017,
+      "version": null,
+      "resource_type": "conference"
+    },
+    "variant": {
+      "name": "Soft-DTW value and gradient",
+      "stage": "training",
+      "realization": "paper",
+      "configuration_notes": "A smooth training loss has different semantics from a hard alignment witness. Do not automatically tag metric."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "softdtw2017"
+    ],
+    "claims": [
+      {
+        "dimension": "entity.domain",
+        "values": [
+          "time_series"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "softdtw2017"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_sequence"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "softdtw2017"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "objective.problem",
+        "values": [
+          "dtw"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "softdtw2017"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "sequence_cmp.family",
+        "values": [
+          "soft_dtw"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "softdtw2017"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "solver.family",
+        "values": [
+          "dynamic_programming"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "softdtw2017"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.algebra",
+        "values": [
+          "smoothed_min"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "softdtw2017"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.differentiation",
+        "values": [
+          "score_gradient"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "softdtw2017"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.kind",
+        "values": [
+          "score",
+          "gradient"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "softdtw2017"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T19",
+      "T21",
+      "T24"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "diffdp2018-framework",
+    "paper_key": null,
+    "work": {
+      "title": "Differentiable Dynamic Programming for Structured Prediction and Attention",
+      "year": 2018,
+      "version": null,
+      "resource_type": "conference"
+    },
+    "variant": {
+      "name": "Regularized differentiable DP framework",
+      "stage": "training",
+      "realization": "paper",
+      "configuration_notes": "Framework-level record; split smoothed Viterbi and smoothed DTW into separate records when screening their concrete contracts."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "diffdp2018"
+    ],
+    "claims": [
+      {
+        "dimension": "solver.family",
+        "values": [
+          "dynamic_programming"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "diffdp2018"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.algebra",
+        "values": [
+          "smoothed_max"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "diffdp2018"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.differentiation",
+        "values": [
+          "score_gradient",
+          "soft_solution"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "diffdp2018"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T19",
+      "T24"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "dedal2023-learning",
+    "paper_key": null,
+    "work": {
+      "title": "Deep embedding and alignment of protein sequences",
+      "year": 2023,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "Joint representation and alignment learning",
+      "stage": "training",
+      "realization": "paper",
+      "configuration_notes": "Only broad capabilities are classified from the abstract; inference solver guarantees and exact gap parameterization remain unverified."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "dedal2023"
+    ],
+    "claims": [
+      {
+        "dimension": "entity.domain",
+        "values": [
+          "protein"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "dedal2023"
+        ],
+        "locator": "Publisher abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "embedding.source",
+        "values": [
+          "trained_task"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "dedal2023"
+        ],
+        "locator": "Publisher abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "learning.component",
+        "values": [
+          "embedding",
+          "alignment"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "dedal2023"
+        ],
+        "locator": "Publisher abstract",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T22",
+      "T23",
+      "T32"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "kaloga2025-sotd",
+    "paper_key": "kaloga2025",
+    "work": {
+      "title": "A Differentiable Alignment Framework for Sequence-to-Sequence Modeling via Optimal Transport",
+      "year": 2025,
+      "version": "arXiv:2502.01588v3, 2025-11-21",
+      "resource_type": "preprint"
+    },
+    "variant": {
+      "name": "SOTD framework, v3",
+      "stage": "sequence_scoring",
+      "realization": "paper",
+      "configuration_notes": "This is the SOTD comparison component; OTTC training and speech recognition should be separate stage records."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "kaloga2025"
+    ],
+    "claims": [
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_sequence"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "kaloga2025"
+        ],
+        "locator": "Abstract and framework introduction, arXiv v3",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "sequence_cmp.family",
+        "values": [
+          "optimal_transport"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "kaloga2025"
+        ],
+        "locator": "Abstract and framework introduction, arXiv v3",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "sequence_cmp.property",
+        "values": [
+          "pseudometric"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "kaloga2025"
+        ],
+        "locator": "Abstract and framework introduction, arXiv v3",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "objective.problem",
+        "values": [
+          "optimal_transport"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "kaloga2025"
+        ],
+        "locator": "Abstract and framework introduction, arXiv v3",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T20",
+      "T21",
+      "T32"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "mash2016-distance",
+    "paper_key": null,
+    "work": {
+      "title": "Mash: fast genome and metagenome distance estimation using MinHash",
+      "year": 2016,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "Sketch-based genome distance estimation",
+      "stage": "sequence_scoring",
+      "realization": "paper",
+      "configuration_notes": "Estimation and evolutionary transformation are not an exact edit-distance or alignment-witness contract."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "mash2016"
+    ],
+    "claims": [
+      {
+        "dimension": "entity.domain",
+        "values": [
+          "dna"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "mash2016"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "representation.sequence",
+        "values": [
+          "sketch"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "mash2016"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "sequence_cmp.family",
+        "values": [
+          "minhash_estimate",
+          "phylogenetic_distance"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "mash2016"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "preprocess.index",
+        "values": [
+          "sketch"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "mash2016"
+        ],
+        "locator": "Abstract",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T03",
+      "T21",
+      "T27"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "poasta2025-fixed-dag",
+    "paper_key": null,
+    "work": {
+      "title": "Fast and exact gap-affine partial order alignment with POASTA",
+      "year": 2025,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "Affine-gap alignment to a fixed POA DAG",
+      "stage": "sequence_scoring",
+      "realization": "paper",
+      "configuration_notes": "Exactness applies to one alignment against a fixed DAG, not the global optimum over a progressively built MSA."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "poasta2025"
+    ],
+    "claims": [
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_graph"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "poasta2025"
+        ],
+        "locator": "Algorithm overview and exact POA formulation",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "graph.role",
+        "values": [
+          "input_reference"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "poasta2025"
+        ],
+        "locator": "Algorithm overview and exact POA formulation",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "graph.topology",
+        "values": [
+          "dag"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "poasta2025"
+        ],
+        "locator": "Algorithm overview and exact POA formulation",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "scoring.gap",
+        "values": [
+          "affine"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "poasta2025"
+        ],
+        "locator": "Algorithm overview and exact POA formulation",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "solver.family",
+        "values": [
+          "a_star"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "poasta2025"
+        ],
+        "locator": "Algorithm overview and exact POA formulation",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "heuristic.kind",
+        "values": [
+          "admissible_bound",
+          "safe_pruning"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "poasta2025"
+        ],
+        "locator": "Algorithm overview and exact POA formulation",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "guarantee.kind",
+        "values": [
+          "exact"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "poasta2025"
+        ],
+        "locator": "Algorithm overview and exact POA formulation",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T10",
+      "T14",
+      "T15",
+      "T18"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "theseus2026-cyclic-graph",
+    "paper_key": null,
+    "work": {
+      "title": "Theseus: fast and optimal affine-gap sequence-to-graph alignment",
+      "year": 2026,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "Affine-gap sequence-to-directed-graph alignment",
+      "stage": "sequence_scoring",
+      "realization": "paper",
+      "configuration_notes": "Partial paper-level classification. Record permitted walks, terminal policy and cost restrictions from the full specification before using as an oracle."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "theseus2026"
+    ],
+    "claims": [
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_graph"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "theseus2026"
+        ],
+        "locator": "Abstract and discussion",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "graph.role",
+        "values": [
+          "input_reference"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "theseus2026"
+        ],
+        "locator": "Abstract and discussion",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "graph.topology",
+        "values": [
+          "directed_cyclic"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "theseus2026"
+        ],
+        "locator": "Abstract and discussion",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "scoring.gap",
+        "values": [
+          "affine"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "theseus2026"
+        ],
+        "locator": "Abstract and discussion",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.state",
+        "values": [
+          "score_frontier"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "theseus2026"
+        ],
+        "locator": "Abstract and discussion",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "guarantee.kind",
+        "values": [
+          "exact"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "theseus2026"
+        ],
+        "locator": "Abstract and discussion",
+        "condition": null,
+        "notes": ""
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": null,
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": null,
+      "numeric_policy": null,
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": null,
+        "free_query_suffix": null,
+        "free_target_prefix": null,
+        "free_target_suffix": null,
+        "local_restart": null
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T10",
+      "T15",
+      "T16",
+      "T17"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "record_id": "accelign2026-global-affine-int",
+    "paper_key": null,
+    "work": {
+      "title": "Accelign: a GPU-based library for accelerating pairwise sequence alignment",
+      "year": 2026,
+      "version": null,
+      "resource_type": "journal"
+    },
+    "variant": {
+      "name": "Global affine-gap integer score kernel",
+      "stage": "sequence_scoring",
+      "realization": "paper",
+      "configuration_notes": "Choose one supported configuration; do not infer arbitrary combinations from library-wide feature lists."
+    },
+    "review": {
+      "status": "provisional",
+      "coverage": "partial",
+      "implementation_approval": "not_requested",
+      "priority": {
+        "relevance": "unassessed",
+        "evidence_readiness": "unassessed",
+        "comparison_compatibility": "unassessed",
+        "mechanism_novelty": "unassessed",
+        "implementation_effort": "unassessed",
+        "dependency_readiness": "unassessed",
+        "oracle_readiness": "unassessed",
+        "resource_fit": "unassessed"
+      },
+      "rationale": "Worked partial classification from the inspected source scope; not implementation approval or a completed specification audit."
+    },
+    "source_ids": [
+      "accelign2026"
+    ],
+    "claims": [
+      {
+        "dimension": "task.arity",
+        "values": [
+          "sequence_sequence"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "alignment.boundary",
+        "values": [
+          "global"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "scoring.gap",
+        "values": [
+          "affine"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "scoring.substitution",
+        "values": [
+          "arbitrary_table"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "solver.family",
+        "values": [
+          "dynamic_programming"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.state",
+        "values": [
+          "grid"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "dp.schedule",
+        "values": [
+          "antidiagonal"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "parallel.level",
+        "values": [
+          "dp_antidiagonals",
+          "sequence_pairs"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "parallel.backend",
+        "values": [
+          "gpu"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "numeric.type",
+        "values": [
+          "fixed_integer"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.kind",
+        "values": [
+          "score"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "output.completeness",
+        "values": [
+          "score_only"
+        ],
+        "status": "supported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Implementation: core parallel algorithm, kernel variants and global alignment; availability of traceback",
+        "condition": null,
+        "notes": ""
+      },
+      {
+        "dimension": "trace.method",
+        "values": [
+          "parent_pointers"
+        ],
+        "status": "unsupported",
+        "basis": "explicit",
+        "source_ids": [
+          "accelign2026"
+        ],
+        "locator": "Discussion: traceback not supported",
+        "condition": null,
+        "notes": "No full traceback in the described library; this is evidence about this version, not a claim about future implementations."
+      }
+    ],
+    "contracts": {
+      "entity_comparator": null,
+      "sequence_comparator": null,
+      "objective_formula": null,
+      "scoring_parameters": null,
+      "gap_formula": "Penalty for k>=1: alpha+(k-1)*beta.",
+      "operation_constraints": null,
+      "representation_details": null,
+      "graph_identity_and_paths": null,
+      "output_semantics": "Global alignment score; full traceback is not provided.",
+      "numeric_policy": "32-bit integer configuration; validate score range and overflow behavior before treating arithmetic as exact.",
+      "embedding_specification": null,
+      "training_and_data": null,
+      "evaluation_protocol": null,
+      "preprocessing_and_resources": null,
+      "boundaries": {
+        "free_query_prefix": false,
+        "free_query_suffix": false,
+        "free_target_prefix": false,
+        "free_target_suffix": false,
+        "local_restart": false
+      }
+    },
+    "complexity": [],
+    "test_ids": [
+      "T05",
+      "T09",
+      "T10",
+      "T24",
+      "T25",
+      "T26"
+    ],
+    "relations": [],
+    "implementation_identity": {
+      "repository": null,
+      "revision": null,
+      "exec_str": null,
+      "parent_record_id": null
+    }
+  }
+]

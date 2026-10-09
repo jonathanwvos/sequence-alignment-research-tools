@@ -1,0 +1,2684 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Literature capability record, v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "paper_key",
+    "work",
+    "variant",
+    "review",
+    "source_ids",
+    "claims",
+    "contracts",
+    "complexity",
+    "test_ids",
+    "relations",
+    "implementation_identity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "paper_key": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "work": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "year",
+        "version",
+        "resource_type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "year": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1900
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "resource_type": {
+          "enum": [
+            "journal",
+            "conference",
+            "preprint",
+            "report",
+            "book",
+            "repository",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "stage",
+        "realization",
+        "configuration_notes"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stage": {
+          "enum": [
+            "whole_pipeline",
+            "preprocess",
+            "entity_scoring",
+            "sequence_scoring",
+            "reconstruction",
+            "graph_construction",
+            "training",
+            "inference",
+            "unknown"
+          ]
+        },
+        "realization": {
+          "enum": [
+            "paper",
+            "implementation",
+            "modified",
+            "experimental"
+          ]
+        },
+        "configuration_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "coverage",
+        "implementation_approval",
+        "priority",
+        "rationale"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "unscreened",
+            "provisional",
+            "source_checked"
+          ]
+        },
+        "coverage": {
+          "enum": [
+            "partial",
+            "full_specification"
+          ]
+        },
+        "implementation_approval": {
+          "enum": [
+            "not_requested",
+            "pending",
+            "approved",
+            "declined"
+          ]
+        },
+        "priority": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "relevance",
+            "evidence_readiness",
+            "comparison_compatibility",
+            "mechanism_novelty",
+            "implementation_effort",
+            "dependency_readiness",
+            "oracle_readiness",
+            "resource_fit"
+          ],
+          "properties": {
+            "relevance": {
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "unassessed"
+              ]
+            },
+            "evidence_readiness": {
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "unassessed"
+              ]
+            },
+            "comparison_compatibility": {
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "unassessed"
+              ]
+            },
+            "mechanism_novelty": {
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "unassessed"
+              ]
+            },
+            "implementation_effort": {
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "unassessed"
+              ]
+            },
+            "dependency_readiness": {
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "unassessed"
+              ]
+            },
+            "oracle_readiness": {
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "unassessed"
+              ]
+            },
+            "resource_fit": {
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "unassessed"
+              ]
+            }
+          }
+        },
+        "rationale": {
+          "type": "string"
+        }
+      }
+    },
+    "source_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dimension",
+          "values",
+          "status",
+          "basis",
+          "source_ids",
+          "locator",
+          "condition",
+          "notes"
+        ],
+        "properties": {
+          "dimension": {
+            "enum": [
+              "task.role",
+              "task.arity",
+              "entity.domain",
+              "entity.alphabet",
+              "entity.unit",
+              "representation.symbol",
+              "representation.sequence",
+              "representation.invariance",
+              "storage.scheme",
+              "storage.compute_domain",
+              "storage.container",
+              "preprocess.transform",
+              "preprocess.index",
+              "preprocess.reuse",
+              "entity_cmp.family",
+              "entity_cmp.codomain",
+              "entity_cmp.context",
+              "entity_cmp.property",
+              "sequence_cmp.family",
+              "sequence_cmp.property",
+              "objective.problem",
+              "objective.optimization",
+              "objective.constraint",
+              "alignment.boundary",
+              "alignment.multiplicity",
+              "alignment.strategy",
+              "scoring.substitution",
+              "scoring.gap",
+              "scoring.operation",
+              "scoring.scale",
+              "solver.family",
+              "dp.state",
+              "dp.algebra",
+              "dp.layout",
+              "dp.schedule",
+              "dp.differentiation",
+              "trace.method",
+              "trace.tie_policy",
+              "graph.role",
+              "graph.topology",
+              "graph.label",
+              "graph.path_semantics",
+              "graph.construct",
+              "graph.traversal",
+              "graph.traversal_purpose",
+              "heuristic.kind",
+              "heuristic.safeguard",
+              "guarantee.kind",
+              "guarantee.evidence",
+              "embedding.level",
+              "embedding.source",
+              "embedding.use",
+              "learning.regime",
+              "learning.component",
+              "learning.alignment_form",
+              "parallel.level",
+              "parallel.backend",
+              "parallel.communication",
+              "numeric.type",
+              "numeric.policy",
+              "resource.model",
+              "resource.parameter",
+              "output.kind",
+              "output.completeness",
+              "evaluation.target",
+              "evaluation.measure",
+              "artifact.kind",
+              "artifact.availability"
+            ]
+          },
+          "values": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "status": {
+            "enum": [
+              "supported",
+              "conditional",
+              "unsupported",
+              "not_reported",
+              "not_applicable",
+              "unverified",
+              "conflicting"
+            ]
+          },
+          "basis": {
+            "enum": [
+              "explicit",
+              "inferred",
+              "unassessed"
+            ]
+          },
+          "source_ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "locator": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "condition": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "task.role"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "alignment",
+                      "distance_estimation",
+                      "homology_search",
+                      "read_mapping",
+                      "assembly",
+                      "variant_calling",
+                      "clustering",
+                      "classification",
+                      "structured_prediction",
+                      "motif_search",
+                      "gene_finding",
+                      "phylogeny",
+                      "data_storage_coding",
+                      "error_correction"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "task.arity"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "single_sequence",
+                      "sequence_sequence",
+                      "sequence_profile",
+                      "profile_profile",
+                      "multiple_sequences",
+                      "sequence_graph",
+                      "graph_graph",
+                      "sequence_database"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "entity.domain"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "abstract_symbols",
+                      "text",
+                      "binary_data",
+                      "dna",
+                      "rna",
+                      "protein",
+                      "codons",
+                      "time_series",
+                      "speech",
+                      "music",
+                      "events",
+                      "structures",
+                      "distributions"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "entity.alphabet"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "binary",
+                      "fixed_finite",
+                      "variable_finite",
+                      "ordered",
+                      "unbounded_discrete",
+                      "continuous",
+                      "set_valued",
+                      "probabilistic"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "entity.unit"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "character",
+                      "base",
+                      "amino_acid",
+                      "codon",
+                      "kmer",
+                      "run",
+                      "word_token",
+                      "sample",
+                      "event",
+                      "vector",
+                      "distribution",
+                      "graph_node"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "representation.symbol"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "character",
+                      "integer_id",
+                      "bit_packed",
+                      "bit_set",
+                      "one_hot",
+                      "probability_vector",
+                      "dense_vector",
+                      "run_pair",
+                      "structured_object"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "representation.sequence"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "array",
+                      "string",
+                      "run_list",
+                      "sparse_matrix",
+                      "dense_matrix",
+                      "tensor",
+                      "profile",
+                      "graph",
+                      "sketch",
+                      "embedding_vector",
+                      "grammar"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "representation.invariance"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "lossless",
+                      "homopolymer_collapse",
+                      "reverse_complement_canonical",
+                      "case_fold",
+                      "quantized",
+                      "order_discarded",
+                      "learned_lossy"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "storage.scheme"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "uncompressed",
+                      "rle",
+                      "bit_packing",
+                      "delta",
+                      "grammar_slp",
+                      "lz",
+                      "bwt",
+                      "entropy",
+                      "general_archive",
+                      "succinct_graph"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "storage.compute_domain"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "uncompressed",
+                      "direct_compressed",
+                      "decompress_then_compute",
+                      "compressed_seeds_only",
+                      "mixed"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "storage.container"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "fasta",
+                      "fastq",
+                      "gfa",
+                      "sam_bam_cram",
+                      "vcf",
+                      "stockholm",
+                      "csv_json",
+                      "binary_custom"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "preprocess.transform"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "none",
+                      "tokenize",
+                      "rle",
+                      "homopolymer_collapse",
+                      "reverse_complement",
+                      "translation",
+                      "masking",
+                      "normalization",
+                      "embedding",
+                      "index_build",
+                      "match_matrix",
+                      "fft"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "preprocess.index"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "none",
+                      "hash_kmer",
+                      "minimizer",
+                      "syncmer",
+                      "strobemer",
+                      "suffix_array",
+                      "suffix_tree",
+                      "fm_index",
+                      "automaton",
+                      "sketch",
+                      "ann",
+                      "lookup_blocks"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "preprocess.reuse"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "per_input",
+                      "per_pair",
+                      "per_database",
+                      "per_batch",
+                      "offline_training"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "entity_cmp.family"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "equality",
+                      "set_overlap",
+                      "ordering",
+                      "substitution_table",
+                      "position_specific",
+                      "dot_product",
+                      "cosine",
+                      "lp_distance",
+                      "kernel",
+                      "learned",
+                      "likelihood"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "entity_cmp.codomain"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "boolean",
+                      "integer",
+                      "real",
+                      "probability",
+                      "vector",
+                      "set"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "entity_cmp.context"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "context_free",
+                      "position_dependent",
+                      "neighborhood",
+                      "whole_sequence",
+                      "cross_sequence",
+                      "profile_conditioned"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "entity_cmp.property"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "symmetric",
+                      "asymmetric",
+                      "reflexive",
+                      "transitive",
+                      "nonnegative",
+                      "identity_of_indiscernibles",
+                      "triangle_inequality"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "sequence_cmp.family"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "lcs_length",
+                      "lis_length",
+                      "edit_distance",
+                      "alignment_score",
+                      "percent_identity",
+                      "dtw",
+                      "soft_dtw",
+                      "optimal_transport",
+                      "jaccard",
+                      "minhash_estimate",
+                      "embedding_distance",
+                      "likelihood",
+                      "phylogenetic_distance"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "sequence_cmp.property"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "symmetric",
+                      "asymmetric",
+                      "nonnegative",
+                      "zero_self",
+                      "identity_of_indiscernibles",
+                      "triangle_inequality",
+                      "metric",
+                      "pseudometric",
+                      "divergence",
+                      "similarity_only"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "objective.problem"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "lcs",
+                      "longest_common_substring",
+                      "lis",
+                      "edit_distance",
+                      "weighted_alignment",
+                      "dtw",
+                      "optimal_transport",
+                      "viterbi",
+                      "partition_function",
+                      "sum_of_pairs",
+                      "tree_alignment",
+                      "constrained_coding",
+                      "retrieval"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "objective.optimization"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "maximize",
+                      "minimize",
+                      "marginalize",
+                      "count",
+                      "enumerate",
+                      "multiobjective"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "objective.constraint"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "unrestricted",
+                      "anchors",
+                      "band",
+                      "collinearity",
+                      "splicing",
+                      "frameshifts",
+                      "rearrangements",
+                      "circular",
+                      "motifs",
+                      "haplotype_paths",
+                      "length_bound"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "alignment.boundary"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "global",
+                      "local",
+                      "semiglobal",
+                      "overlap",
+                      "prefix",
+                      "infix",
+                      "custom"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "alignment.multiplicity"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "one_to_one",
+                      "one_to_many",
+                      "many_to_many",
+                      "unaligned_allowed"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "alignment.strategy"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "direct_pairwise",
+                      "progressive",
+                      "guide_tree",
+                      "iterative_refinement",
+                      "consistency",
+                      "center_star",
+                      "joint_optimization",
+                      "template_based"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "scoring.substitution"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "unit",
+                      "match_mismatch",
+                      "arbitrary_table",
+                      "pam",
+                      "blosum",
+                      "pssm",
+                      "contextual",
+                      "learned",
+                      "quality_aware"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "scoring.gap"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "none",
+                      "unit",
+                      "linear",
+                      "affine",
+                      "two_piece_affine",
+                      "convex",
+                      "concave",
+                      "arbitrary",
+                      "learned",
+                      "splice_specific"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "scoring.operation"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "match",
+                      "substitution",
+                      "insertion",
+                      "deletion",
+                      "transposition",
+                      "duplication",
+                      "reversal",
+                      "splice",
+                      "frameshift"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "scoring.scale"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "nonnegative_cost",
+                      "signed_reward",
+                      "log_odds",
+                      "probability",
+                      "normalized",
+                      "unnormalized"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "solver.family"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "dynamic_programming",
+                      "lis_reduction",
+                      "binary_search",
+                      "four_russians",
+                      "bit_parallel",
+                      "wavefront_alignment",
+                      "a_star",
+                      "dijkstra",
+                      "flow",
+                      "optimal_transport",
+                      "sinkhorn",
+                      "fft",
+                      "automaton",
+                      "branch_and_bound",
+                      "ilp",
+                      "sat",
+                      "maximum_clique",
+                      "greedy",
+                      "metaheuristic",
+                      "neural_inference"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "dp.state"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "grid",
+                      "multidimensional_grid",
+                      "sparse_matches",
+                      "score_frontier",
+                      "graph_product",
+                      "profile_states",
+                      "intervals",
+                      "subsets"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "dp.algebra"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "min_plus",
+                      "max_plus",
+                      "sum_product",
+                      "logsumexp",
+                      "smoothed_max",
+                      "smoothed_min",
+                      "boolean",
+                      "counting",
+                      "pareto"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "dp.layout"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "full_table",
+                      "rolling_rows",
+                      "rolling_columns",
+                      "checkpoint",
+                      "divide_conquer",
+                      "bit_vector",
+                      "blocked",
+                      "tabulated",
+                      "frontier",
+                      "sparse",
+                      "tensor"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "dp.schedule"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "row_major",
+                      "column_major",
+                      "antidiagonal",
+                      "score_order",
+                      "topological",
+                      "best_first",
+                      "recursive",
+                      "blocked"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "dp.differentiation"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "none",
+                      "score_gradient",
+                      "soft_solution",
+                      "hard_solution_surrogate",
+                      "implicit_gradient",
+                      "train_only",
+                      "inference_time"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "trace.method"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "none",
+                      "parent_pointers",
+                      "recompute",
+                      "divide_conquer",
+                      "checkpoint",
+                      "backward_dp",
+                      "graph_search",
+                      "enumeration",
+                      "sample_posterior"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "trace.tie_policy"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "arbitrary_one",
+                      "deterministic_one",
+                      "all_distinct_strings",
+                      "all_position_alignments",
+                      "all_graph_paths",
+                      "top_k",
+                      "sampled",
+                      "capped"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "graph.role"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "input_reference",
+                      "implicit_edit_state",
+                      "explicit_match_intermediate",
+                      "alignment_output",
+                      "guide_tree",
+                      "probabilistic_model",
+                      "search_index"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "graph.topology"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "path",
+                      "tree",
+                      "dag",
+                      "directed_cyclic",
+                      "bidirected",
+                      "undirected",
+                      "hypergraph"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "graph.label"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "base",
+                      "string",
+                      "profile",
+                      "coordinate",
+                      "score",
+                      "unlabelled"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "graph.path_semantics"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "arbitrary_walk",
+                      "simple_path",
+                      "haplotype_restricted",
+                      "dag_path",
+                      "bounded_unrolling",
+                      "orientation_aware"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "graph.construct"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "sequence_to_path",
+                      "progressive_poa",
+                      "de_bruijn",
+                      "overlap_graph",
+                      "variation_graph",
+                      "match_to_graph",
+                      "edit_graph",
+                      "assembly",
+                      "graph_update"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "graph.traversal"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "topological",
+                      "bfs",
+                      "dfs",
+                      "dijkstra",
+                      "a_star",
+                      "best_first",
+                      "wavefront",
+                      "dynamic_programming",
+                      "branch_and_bound"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "graph.traversal_purpose"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "construction",
+                      "scoring",
+                      "search",
+                      "reconstruction",
+                      "enumeration",
+                      "reachability"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "heuristic.kind"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "none",
+                      "seeding",
+                      "chaining",
+                      "banding",
+                      "adaptive_band",
+                      "x_drop",
+                      "z_drop",
+                      "beam",
+                      "greedy",
+                      "learned",
+                      "progressive",
+                      "randomized",
+                      "admissible_bound",
+                      "safe_pruning",
+                      "genetic",
+                      "ant_colony"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "heuristic.safeguard"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "none",
+                      "admissibility_proof",
+                      "bound_certificate",
+                      "band_doubling",
+                      "exact_fallback",
+                      "exhaustive_completion",
+                      "error_bound"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "guarantee.kind"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "exact",
+                      "exact_restricted",
+                      "bounded_approximation",
+                      "probabilistic",
+                      "heuristic",
+                      "numerical_approximation",
+                      "empirical_only"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "guarantee.evidence"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "proof",
+                      "stated_theorem",
+                      "empirical_validation",
+                      "author_claim",
+                      "independent_replication"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "embedding.level"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "entity",
+                      "contextual_entity",
+                      "sequence",
+                      "profile",
+                      "graph",
+                      "structure"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "embedding.source"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "handcrafted",
+                      "physicochemical",
+                      "spectral",
+                      "geometric",
+                      "trained_task",
+                      "protein_language_model",
+                      "general_language_model",
+                      "random_projection"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "embedding.use"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "entity_score",
+                      "sequence_score",
+                      "seeding",
+                      "retrieval",
+                      "clustering",
+                      "prediction",
+                      "alignment_training"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "learning.regime"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "none",
+                      "supervised",
+                      "self_supervised",
+                      "unsupervised",
+                      "contrastive",
+                      "reinforcement",
+                      "fine_tuned",
+                      "frozen_pretrained"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "learning.component"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "embedding",
+                      "substitution",
+                      "gap",
+                      "heuristic",
+                      "alignment",
+                      "objective",
+                      "graph",
+                      "classifier"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "learning.alignment_form"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "hard",
+                      "soft",
+                      "latent",
+                      "supervised",
+                      "surrogate"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "parallel.level"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "bit_parallel",
+                      "simd",
+                      "entity_pairs",
+                      "dp_antidiagonals",
+                      "dp_tiles",
+                      "frontiers",
+                      "graph_partitions",
+                      "sequence_pairs",
+                      "database_shards",
+                      "training_batches"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "parallel.backend"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "cpu_scalar",
+                      "cpu_simd",
+                      "cpu_threads",
+                      "gpu",
+                      "multi_gpu",
+                      "distributed",
+                      "fpga",
+                      "asic",
+                      "processing_in_memory"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "parallel.communication"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "none",
+                      "barriers",
+                      "atomics",
+                      "warp_shuffle",
+                      "host_device",
+                      "device_device",
+                      "network"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "numeric.type"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "arbitrary_integer",
+                      "fixed_integer",
+                      "float16",
+                      "bfloat16",
+                      "float32",
+                      "float64",
+                      "fixed_point",
+                      "boolean"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "numeric.policy"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "exact_range",
+                      "saturating",
+                      "overflow_detected",
+                      "precision_fallback",
+                      "rounding",
+                      "tolerance",
+                      "deterministic",
+                      "nondeterministic"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "resource.model"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "comparison",
+                      "word_ram",
+                      "bit_complexity",
+                      "external_memory",
+                      "parallel_work_span",
+                      "gpu_device"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "resource.parameter"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "raw_lengths",
+                      "run_counts",
+                      "alphabet_size",
+                      "match_count",
+                      "optimal_score",
+                      "edit_bound",
+                      "word_bits",
+                      "embedding_dim",
+                      "nodes",
+                      "edges",
+                      "sequence_count",
+                      "output_size",
+                      "batch_size"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "output.kind"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "score",
+                      "length",
+                      "one_subsequence",
+                      "one_alignment",
+                      "all_distinct_subsequences",
+                      "all_position_alignments",
+                      "graph_path",
+                      "graph_walk",
+                      "alignment_graph",
+                      "cigar",
+                      "endpoints",
+                      "ranking",
+                      "soft_matrix",
+                      "posterior",
+                      "gradient",
+                      "count",
+                      "embedding"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "output.completeness"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "score_only",
+                      "one_optimum",
+                      "all_optima",
+                      "top_k",
+                      "sampled",
+                      "bounded",
+                      "capped",
+                      "approximate"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "evaluation.target"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "score_correctness",
+                      "witness_validity",
+                      "enumeration_completeness",
+                      "alignment_accuracy",
+                      "homology_accuracy",
+                      "mapping_accuracy",
+                      "retrieval_accuracy",
+                      "downstream_task",
+                      "runtime",
+                      "memory",
+                      "energy"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "evaluation.measure"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "exact_agreement",
+                      "precision",
+                      "recall",
+                      "f1",
+                      "auroc",
+                      "auprc",
+                      "sp_score",
+                      "tc_score",
+                      "rmsd",
+                      "percent_identity",
+                      "edit_error_rate",
+                      "wall_time",
+                      "throughput",
+                      "gcups",
+                      "rss",
+                      "vram",
+                      "output_bytes",
+                      "energy"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "artifact.kind"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "paper",
+                      "source_code",
+                      "binary",
+                      "container",
+                      "dataset",
+                      "benchmark_manifest",
+                      "weights",
+                      "proof",
+                      "erratum"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "dimension": {
+                  "const": "artifact.availability"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "items": {
+                    "enum": [
+                      "local",
+                      "public",
+                      "subscription",
+                      "request_only",
+                      "unavailable"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "enum": [
+                    "supported",
+                    "conditional",
+                    "unsupported",
+                    "conflicting"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "minItems": 1
+                },
+                "source_ids": {
+                  "minItems": 1
+                },
+                "locator": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "basis": {
+                  "enum": [
+                    "explicit",
+                    "inferred"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "conditional"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "condition": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "enum": [
+                    "not_reported",
+                    "not_applicable",
+                    "unverified"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "values": {
+                  "maxItems": 0
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_comparator",
+        "sequence_comparator",
+        "objective_formula",
+        "scoring_parameters",
+        "gap_formula",
+        "operation_constraints",
+        "representation_details",
+        "graph_identity_and_paths",
+        "output_semantics",
+        "numeric_policy",
+        "embedding_specification",
+        "training_and_data",
+        "evaluation_protocol",
+        "preprocessing_and_resources",
+        "boundaries"
+      ],
+      "properties": {
+        "entity_comparator": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sequence_comparator": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "objective_formula": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scoring_parameters": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gap_formula": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "operation_constraints": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "representation_details": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "graph_identity_and_paths": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "output_semantics": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "numeric_policy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "embedding_specification": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "training_and_data": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evaluation_protocol": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "preprocessing_and_resources": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "boundaries": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "free_query_prefix",
+            "free_query_suffix",
+            "free_target_prefix",
+            "free_target_suffix",
+            "local_restart"
+          ],
+          "properties": {
+            "free_query_prefix": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "free_query_suffix": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "free_target_prefix": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "free_target_suffix": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "local_restart": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "complexity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "phase",
+          "measure",
+          "bound",
+          "parameters",
+          "assumptions",
+          "basis",
+          "source_ids",
+          "locator"
+        ],
+        "properties": {
+          "phase": {
+            "enum": [
+              "preprocessing",
+              "kernel",
+              "reconstruction",
+              "enumeration",
+              "training",
+              "end_to_end"
+            ]
+          },
+          "measure": {
+            "enum": [
+              "time",
+              "auxiliary_space",
+              "total_space",
+              "work",
+              "span",
+              "io"
+            ]
+          },
+          "bound": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "assumptions": {
+            "type": "string",
+            "minLength": 1
+          },
+          "basis": {
+            "enum": [
+              "explicit",
+              "inferred"
+            ]
+          },
+          "source_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "locator": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "test_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "T01",
+          "T02",
+          "T03",
+          "T04",
+          "T05",
+          "T06",
+          "T07",
+          "T08",
+          "T09",
+          "T10",
+          "T11",
+          "T12",
+          "T13",
+          "T14",
+          "T15",
+          "T16",
+          "T17",
+          "T18",
+          "T19",
+          "T20",
+          "T21",
+          "T22",
+          "T23",
+          "T24",
+          "T25",
+          "T26",
+          "T27",
+          "T28",
+          "T29",
+          "T30",
+          "T31",
+          "T32"
+        ]
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "target",
+          "notes"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "extends",
+              "reduces_to",
+              "same_objective",
+              "different_output",
+              "implementation_of",
+              "corrects",
+              "variant_of",
+              "supersedes"
+            ]
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "implementation_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "revision",
+        "exec_str",
+        "parent_record_id"
+      ],
+      "properties": {
+        "repository": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exec_str": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parent_record_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

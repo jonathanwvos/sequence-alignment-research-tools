@@ -1,0 +1,105 @@
+# Accelerating Cryptanalysis with the Method of Four Russians
+
+- Work ID: `w-2c8abbeb7cd3`
+- Asset ID: `a-2c8abbeb7cd36a25`
+- Source PDF: `literature/academic-papers-processed/Accelerating Cryptanalysis with the Method of Four Russians - Bard.pdf`
+- SHA-256: `2c8abbeb7cd36a25d4abd172f80c44e647968b7105040dd6078aaee06fce1f66`
+- ASD-STE100 Issue 9 review: **Pending manual review**
+
+## Executive summary
+
+- Bard describes M4RI for dense Boolean linear systems. The paper gives a cost analysis and experimental runtime measurements. (PDF p. 1).
+- The author reports O(n³/log n) complexity and a 3.36× speedup over Gaussian elimination on a random 32,000 × 32,000 Boolean matrix. (PDF p. 1).
+
+## Objectives
+
+- The study aims to specify M4RI, analyze its cost, test its performance, and estimate linear-algebra costs for published cryptanalytic attacks. (PDF p. 2).
+
+## Arguments
+
+- The author retains leading coefficients in complexity estimates to calculate crossover sizes between algorithms. (PDF p. 2).
+- The author argues that Strassen-based inversion needs modification over GF(2) and is slower than M4RI at feasible matrix sizes. (PDF p. 3).
+
+## Analysis
+
+- The model places the crossover between M4RI and Strassen-based inversion at approximately 6.65 million rows. (PDF p. 3).
+- Runtime measurements are divided by modeled matrix memory-operation counts to estimate a rate of 1.11 × 10^8 operations per second on the author's PC. (PDF p. 12).
+- The attack estimates convert matrix memory-operation counts into PC and supercomputer runtimes. The author identifies the supercomputer conversion as an estimate. (PDF p. 12).
+
+## Methods
+
+- M4RI reduces a Boolean system to unit upper triangular form for solution by back substitution. Applying its third stage to earlier rows also produces reduced row echelon form. (PDF p. 8).
+- To compute an inverse, the method appends an identity matrix and reduces the augmented matrix. For an invertible input, the inverse appears in the right half. (PDF p. 8).
+
+## Applications
+
+- The intended applications include dense linear systems from stream-cipher attacks, HFE attacks, and integer factorization. (PDF p. 1).
+- The author also proposes M4RI for smaller dense systems obtained during sparse-system processing. (PDF p. 2).
+
+## Optimization
+
+- Parameter tuning gives a fitted choice k = (3/4)log n. Changing k by one has little measured effect; changing it by two alters runtime by a few percent. (PDF p. 8).
+- Some experiments fix k at eight and rewrite the code to simplify addressing. Another experiment allows k to vary and gives the best reported runtimes. (PDF p. 8).
+- The study tests compiler optimization levels because compilation settings substantially affect runtime. (PDF p. 8).
+
+## Evaluation and testing
+
+- Tests generate matrices with independent fair-coin entries and discard singular matrices. Both M4RI and Gaussian elimination compute the inverse of each retained matrix. (PDF p. 8).
+- The test checks that the two inverses agree. It also multiplies an inverse by the original matrix and checks for the identity matrix. (PDF p. 8).
+- Functions are timed separately with C clock(). Correctness checks are outside the measured functions. The timer measures user time. (PDF p. 8).
+- Parameter selection uses 30 matrices per tested case. Their preferred k values agree except when timer resolution produces ties. (PDF p. 8).
+
+## Results
+
+- The reported speedup over Gaussian elimination is 3.36× for a random 32,000 × 32,000 Boolean matrix. (PDF p. 1).
+- Extending triangulation to reduced row echelon form changes the stated leading cost coefficient from 2.5 to 3. (PDF p. 8).
+
+## Limitations and uncertainty
+
+- The analysis concerns dense systems. Specialized sparse methods can be substantially faster on sparse inputs. (PDF p. 2).
+- The experimental timer has 0.01-second resolution, which can produce ties during parameter selection. (PDF p. 8).
+- Attack runtime estimates ignore sparsity and use an approximate conversion from floating-point throughput to matrix memory-operation throughput. (PDF p. 12).
+- The author warns that a slow dense-system estimate does not prove an attack infeasible. Sparse methods may still succeed. (PDF p. 13).
+
+## References
+
+1. A. Aho, J. Hopcroft, and J. Ullman. “Chapter 6: Matrix Multiplication and Related Oper- ations.” The Design and Analysis of Computer Algorithms. Addison-Wesley, 1974. (PDF p. 13)
+2. D. Atkins, M. Graff, A. Lenstra, P. Leyland. “The Magic Words are Squeamish Os- sifrage.” Advances in Cryptology: ASIACRYPT’94 1994. (PDF p. 13)
+3. V. Arlazarov, E. Dinic, M. Kronrod, and I. Faradzev. “On Economical Construction of the Transitive Closure of a Directed Graph.” Dokl. Akad. Nauk. SSSR No. 194 (in Russian), English Translation in Soviet Math Dokl. No. 11, 1970. (PDF p. 13)
+4. F. Armknecht. “A Linearization Attack on the Bluetooth Key Stream Generator.” IACR E-print, 2002, No. 191. (PDF p. 13)
+5. F. Armknecht. “Improving Fast Algebraic Attacks.” Proceedings of Fast Software Encryp- tion ’04, Springer-Verlag Lecture Notes in Computer Science, 2004. (PDF p. 13)
+6. F. Armknecht, and G. Ars. “Introducing a New Variant of Fast Algebraic Attacks and Minimizing Their Successive Data Complexity.” Proceedings of Mycrypt ’05, Springer-Verlag Lecture Notes in Computer Science, 2005. (PDF p. 13)
+7. F. Armknecht and M. Krause. “Algebraic Attacks on Combiners with Memory.” Advances in Cryptology: CRYPTO 2003. (PDF p. 13)
+8. M. Atkinson and N. Santoro. “A Practical Algorithm for Boolean Matrix Multiplication.” Information Processing Letters. 13 September 1988. (PDF p. 13)
+9. G. Bard. “Achieving a log(n) Speed Up for Boolean Matrix Operations and Calculating the Complexity of the Dense Linear Algebra step of Algebraic Stream Cipher Attacks and of Integer Factorization Methods.” IACR E-print, 2006, No. 163. 13 (PDF p. 13)
+10. D. Bernstein. “Matrix Inversion Made Difficult.” Unpublished Manuscript available on http://cr.yp.to/papers/mimd.ps (PDF p. 14)
+11. J. Bunch and J. Hopcroft. “Triangular Factorization and Inversion by Fast Matrix Multi- plication.” Math Comp. No. 28:125, 1974. (PDF p. 14)
+12. T. Cormen, C. Leiserson, R. Rivest, and C. Stein. “Chapter 28: Matrix Operations.” Introduction to Algorithms, Second Edition. MIT Press, McGraw-Hill Book Company, 2001. (PDF p. 14)
+13. D. Coppersmith and S. Winograd. “Matrix Multiplication via Arithmetic Progressions.” J. of Symbolic Computation, 9. 1990. (PDF p. 14)
+14. N. Courtois. “The security of Hidden Field Equations (HFE)”, Cryptographers’ Track Rsa Conference, 2001. (PDF p. 14)
+15. N. Courtois. “Higher Order Correlation Attacks, XL Algorithm and Cryptanalysis of Toy- ocrypt.” Proceedings of ICISC ’02, Springer-Verlag Lecture Notes in Computer Science, 2002. (PDF p. 14)
+16. N. Courtois. “Fast Algebraic Attacks on Stream Ciphers with Linear Feedback.” Advances in Cryptology: CRYPTO 2003. (PDF p. 14)
+17. N. Courtois. “Algebraic Attacks on Combiners with Memory and Several Outputs.” Pro- ceedings of ICISC ’04, Springer-Verlag Lecture Notes in Computer Science, 2004. (PDF p. 14)
+18. N. Courtois. “Short Signatures, Provable Security, Generic Attacks and Computational Security of Multivariate Polynomial Schemes such as HFE, Quartz and Sflash.” IACR E-print, 2004, No. 143. (PDF p. 14)
+19. N. Courtois. “Cryptanalysis of Sfinks.” Proceedings of ICISC ’05, Springer-Verlag Lecture Notes in Computer Science, 2005. (PDF p. 14)
+20. N. Courtois, L. Goubin, and J. Patarin. “SFLASHv3, a fast asymmetric signature scheme.” IACR E-print, 2003, No. 211. (PDF p. 14)
+21. N. Courtois, and W. Meier. “Algebraic Attacks on Stream Ciphers with Linear Feedback.” Advances in Cryptology: EUROCRYPT 2003. (PDF p. 14)
+22. N. Courtois, and J. Pieprzyk. “Cryptanalysis of Block Ciphers with Overdefined Systems of Equations.” Advances in Cryptology: ASIACRYPT 2002. (PDF p. 14)
+23. J. Faugère, and A. Joux. “Algebraic Cryptanalysis of Hidden Field Equation (HFE) Cryp- tosystems Using Gröbner Bases” Advances in Cryptology: CRYPTO 2003. (PDF p. 14)
+24. M. Furman. “Application of a Method of Fast Multiplication of Matrices in the Problem of Finding the Transitive Closure of a Graph.” Dokl. Akad. Nauk. SSSR No. 194 (in Russian), English Translation in Soviet Math Dokl. No. 3, 1970. (PDF p. 14)
+25. F. Gray. Pulse Code Communication. March 17, 1953. USA Patent 2,632,058. (PDF p. 14)
+26. P. Hawkes, and G. Rose. “Rewriting Variables: the Complexity of Fast Algebraic Attacks on Stream Ciphers.” Advances in Cryptology: CRYPTO 2004. 14 (PDF p. 14)
+27. N. Higham. “Chapter 23: Fast Matrix Multiplication.” Accuracy and Stability of Numer- ical Algorithms, Second Edition. SIAM, 2002. (PDF p. 15)
+28. S. Kangshen, J. Crossley, and L. Anthony (Eds.) The Nine Chapters on the Mathematical Art. Oxford University Press. 1999. (PDF p. 15)
+29. E. Moore. “On the Reciprocal of the General Algebraic Matrix.” Bulletin of the American Mathematical Society. 26, 1920. (PDF p. 15)
+30. V. Pan. “Chapter 1: The Exponent of Matrix Multiplication.” How to Multiply Matrices Faster. Springer-Verlag, 1984. (PDF p. 15)
+31. R. Penrose “A Generalized Inverse for Matrices.” Proc. of the Cambridge Phil. Soc. 51. 1955. (PDF p. 15)
+32. C. Pomerance and J. Smith. “Reduction of Huge, Sparse Matrices over Finite Fields via Created Catastrophes.” Experimental Mathematics. Vol. 1, No. 2. 1992. (PDF p. 15)
+33. N. Santoro. “Extending the Four Russians’ Bound to General Matrix Multiplication.” Information Processing Letters. 18 March 1979. (PDF p. 15)
+34. N. Santoro and J. Urrutia. “An Improved Algorithm for Boolean Matrix Multiplication.” Computing, 36. 1986. (PDF p. 15)
+35. A. Schönhage. “Partial and Total Matrix Multiplication.” SIAM Journal of Computing, Vol 10, No. 3, August 1981. (PDF p. 15)
+36. A. Shamir, J. Patarin, N. Courtois, and A. Klimov. “Efficient Algorithms for solv- ing Overdefined Systems of Multivariate Polynomial Equations.” Advances in Cryptology: CRYPTO 2004. (PDF p. 15)
+37. V. Strassen. “Gaussian Elimination is not Optimal.” Numerische Mathematik, Vol 13, No 3. 1969. (PDF p. 15)
+38. V. Strassen. “Relative Bilinear Complexity and Matrix Multiplication.” J. Reine Angew. Math. Vols 375 & 376, 1987. [wiki] “Gaussian Elimination.” From Wikipedia—The Free Encyclopedia. [wiki2] “SETI@Home.” From Wikipedia—The Free Encyclopedia. A The Unsuitability of Strassen’s Algorithm It is important to note that Strassen’s famous paper [Str69] has three algorithms. The first is a matrix multiplication algorithm, which we call “Strassen’s Algorithm for Matrix Multiplication.” The second is a method for using any matrix multiplication technique for matrix inversion, in asymptotically equal time (in the big-Oh sense). We call this Strassen’s Formula for Matrix Inver- sion. The third is a method for the calculation of the determinant of a matrix. Below, Strassen’s Formula for Matrix Inversion is analyzed, by which a system of equations over a field can be solved. 15 Given a square matrix A, by dividing it into equal quadrants one obtains the following inverse: (A more detailed exposition is found in [CLRS], using the same notation). A = " B C D E # ⇒ A−1 = " B−1 + B−1CS−1DB−1 −B−1CS−1 −S−1DB−1 S−1 # where S = E − DB−1C, which is the Schur Complement of A with respect to B. One can easily check that the product of A and the matrix formula for A−1 yields the identity matrix, either multiplying on the left or on the right. If an inverse for a matrix exists, it is unique, and so therefore this formula gives the unique inverse of A, provided that A is in fact invertible. However, it is a clear requirement of this formula that B and S be invertible. Over the real numbers, or other subfields of the complex numbers, one can show that if A and B are non-singular, then S is non-singular also [CLRS]. The problem is to guarantee that the upper-left submatrix, B, is invertible. Strassen did not address this in the original paper, but the usual solution is as follows (more details found in [CLRS]). First, if A is positive symmetric definite, then all of its principal submatrices are positive symmetric definite, including B. All positive symmetric definite matrices are non-singular, so B is invertible. Now, if A is not positive symmetric definite, but is non-singular, then note that AT A is positive symmetric definite and that (AT A)−1AT = A−1. This also can be used to make a pseudoinverse for non-square matrices, called the Moore-Penrose Pseudoinverse [Moo20, Pen55, Ber95]. However, the concept of positive symmetric definite does not work over a finite field, because these fields cannot be ordered (in the sense of an ordering that respects the addition and multipli- cation operations). Observe the following counterexample, A =      1 0 0 0 1 0 1 0 0 1 0 0 0 1 0 1      AT A =      0 0 1 0 0 0 0 1 1 0 1 0 0 1 0 1      Both A and AT A have det = 1, thus are invertible. Yet in both cases the upper-left hand 2x2 submatrices have det = 0, and therefore are not invertible. Thus Strassen’s formula for inversion is unusable without modification. The modification below is from Aho, Hopcroft and Ullman’s book [AHU] though first appeared in [BH74]. Consider a matrix L that is unit lower triangular, and a matrix U that is unit upper triangular. Then Strassen’s Matrix Inversion Formula indicates L = " B 0 D E # ⇒ L−1 = " B−1 0 −E−1DB−1 E−1 # U = " B C (PDF p. 15)
+39. E # ⇒ U−1 = " B−1 −B−1CE−1 (PDF p. 16)
+40. E−1 # Note S = E − DB−1C, which is the Schur Complement of A with respect to B, becomes S = E in both cases, since either C or D is the zero matrix. Since L (or U) is unit lower (or upper) triangular, then its submatrices B and E are also unit lower (or upper triangular), and therefore 16 invertible. Therefore Strassen’s Matrix Inversion Formula over GF(2) will always work for unit lower or upper triangular matrices. It is well known that any matrix over any field has a factorization A = LUP where P is a permutation matrix, L is unit lower triangular and U is unit upper triangular [CLRS]. Once A is thus factored, the matrix inversion formula is sufficient to calculate A−1. Aho, Hopcroft and Ullman [AHU] give an algorithm for computing the LUP factorization over an arbitrary field, in time equal to big-Oh of matrix multiplication, by use of a black-box matrix multiplication algorithm. We call this algorithm AHU-LUP. The algorithm is very complex and is not given here, but a detailed analysis is found in the author’s E-print [Bar06]. Once the factorization of A is complete, Strassen’s Matrix Inversion Formula can be applied to L and U. Note P = P−1, and also A−1 = P−1U−1L−1. Consequences Therefore to use the Strassen Matrix Inversion Formula, we calculate the LUP- factorization, invert both L and U, and finally perform matrix multiplication to get A−1. These extra steps, which are each of equal complexity to the whole algorithm in the big-Oh sense, add a large hidden coefficient to O(n2.81), and make the crossover with Gaussian Elimination enormous. This coefficient is calculated explicitly in the author’s E-print [Bar06], and is ∼ 6.4893n2.81 matrix memory operations, for inverting a boolean matrix. The equivalent value for M4RI is ∼ 9n3/(64 log n) (this is an underdefined n × 2n matrix, processed with M4RI into RREF). Simple calculation shows that these two expressions are equal for n = 1.33 × 1018 rows. Recall, this is the point where the two algorithms are of equal performance. The point at which Strassen is twice as fast as the M4RI is n = 8.44 × 1020 rows. These matrices are have 1.78 × 1036 and 7.11 × 1039 entries respectively. For this reason, Strassen’s Formula for Matrix Inversion is not faster than the method of Four Russians for any size matrix whose inverse can be computed at present. However, if one merely wants to solve a system of equations, one can perform the LU-factorization using AHU-LUP with Strassen’s Matrix Multiplication in the black box, and then use back- substitution, without calculating A−1 explicitly. This changes the coefficients to ∼ 2.2876n2.81 and ∼ 2.5n3/(64 log n). The cross-over is therefore at 5.59 × 1018, and the doubling point 3.47 × 1020. Parralelization Note that Strassen’s Algorithm for Matrix Multiplication and Strassen’s Matrix Inversion Formula are potentially amenable to parralelization, since no communication between processes is required once A is cut into quadrants [CLRS]. Therefore, in the presence of 4n pro- cessors Strassen’s Algorithm or Formula could be useful in breaking the problem up n times into 4n pieces, each of which can be solved independently via the M4RI or M4RM as required. The complexity, however, would still depend on the underlying algorithm (M4RI or M4RM) and there exist circumstances in which it would be better to run M4RI on one processor and leave all the others idle than it would to run Strassen’s algorithms (see the author’s E-print [Bar06]). Finally, note that it might be possible to find a method of speeding up Strassen by a factor of 64, using 64-bit arithmetic. This would make the cross-overs 9.63 × 106 and 1.40 × 106 for system-solving and matrix inversion, respectively. 17 Table 1: Inversion Algorithms and Asymptotic Performance Algorithm Overdefined Square Underdefined System Upper-Triangularization M4RI (UUTF) (n3 + 1.5n2m)/(log n) (2.5n3)/(log n) (4.5nm2 − 2m3)/(log m) AHU-LUP Fact. with Strassen — 2.2876nlog 7 2.2876mlog 7 + 3mn Dense Gaussian Elim. (UUTF) 0.75mn2 − 0.25n3 0.5n3 0.75nm2 − 0.25m3 Back Substitution n2 + m n2 m2 + n Matrix Inversion Strassen’s—U/L Triang. Inversion — 0.9337nlog 7 — Strassen’s—General Inversion — 6.4893nlog 7 — Dense Gaussian Elim. (RREF) 0.75mn2 0.75n3 1.5nm2 − 0.75m3 M4RI (RREF) (3n3 + 3mn2)/(2 log n) (3n3)/(log n) (6nm2 − 3m3)/(log m) Table 2: Multiplication Algorithms and Asymptotic Performance Algorithm Rectangular a × b by b × c Square n × n by n × n Multiplication M4RM (3b2 min(a, c) + 3abc)/(log b) + b max(a, c) (6n3)/(log n) Naı̈ve Multiplication 2abc 2n3 Strassen’s Algorithm 2.3343(abc)(log 7)/(3) 2.3343nlog 7 Table 3: Running times, in msec, Optimization Level 0 k 1,024 1,536 2,048 3,072 4,096 6,144 8,192 12,288 16384 5 870 2,750 6,290 20,510 47,590 —* —* —* – 6 760 2,340 5,420 17,540 40,630 132,950 —* 1,033,420 – 7 710 2,130 4,850 15,480 35,540 116,300 —* 903,200 – 8 680 2,040 4,550 14,320 32,620 104,960 242,990 798,470 – 9 740 2,100 4,550 13,860 30,990 97,830 223,270 737,990 1,703,290 10 880 2,360 4,980 14,330 31,130 95,850 215,080 690,580 1,595,340 11 1,170 2,970 5,940 16,260 34,020 99,980 218,320 680,310 1,528,900 12 1,740 4,170 7,970 20,470 41,020 113,270 238,160 708,640 1,557,020 13 2,750 6,410 11,890 29,210 55,970 147,190 295,120 817,950 1,716,990 14 4,780 10,790 19,390 45,610 84,580 208,300 399,810 1,045,430 – 15 8,390 18,760 33,690 77,460 140,640 335,710 623,450 1,529,740 – 16 15,290 34,340 60,570 137,360 246,010 569,740 1,034,690 2,440,410 – *Indicates that too many abortions occured due to singular submatrices. See Section 5.1. 18 Table 4: Percentage Error for Offset of K, From Experiment 1 error of k 1,024 1,536 2,048 4,096 6,144 8,192 12,288 16384 -4 — — 48.0% 53.6% 38.7% – 32.8% — -3 27.9% 34.8% 26.6% 31.1% 21.3% – 17.4% — -2 11.8% 14.7% 11.7% 14.7% 9.5% 13.0% 8.5% 11.4% -1 4.4% 4.4% 3.3% 5.3% 2.1% 3.8% 1.5% 4.3% Exact 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% 0.0% +1 8.8% 2.9% 3.4% 0.5% 4.3% 1.5% 4.2% 1.8% +2 29.4% 15.7% 17.3% 9.8% 18.2% 10.7% 20.2% 12.3% +3 72.1% 45.6% 47.7% 32.4% 53.6% 37.2% 53.7% — +4 155.9% 104.4% 110.8% 80.6% 117.3% 85.9% 124.9% — +5 304.4% 214.2% 229.1% 172.9% 250.2% 189.9% 258.7% — +6 602.9% 428.9% 458.9% 353.8% 494.4% 381.1% — — Table 5: Results of Experiment 3—Running Times, Fixed k=8 Size M4RI Gaussian Ratio 4,000 rows 18.97 s 6.77 s 2.802 6,000 rows 59.40 s 22.21 s 2.674 8,000 rows 135.20 s 51.30 s 2.635 12,000 rows 167.28 s 450.24 s 2.692 16,000 rows 398.12 s 1023.99 s 2.572 20,000 rows 763.92 s 1999.34 s 2.617 19 Table 6: Experiment 2—Running times in seconds under different Optimizations, k=8 Opt 0 Opt 1 Opt 2 Opt 3 4000 x 4000 Gauss 91.41 48.35 48.37 18.97 Russian 29.85 17.83 17.72 6.77 Ratio 3.062 2.712 2.730 2.802 6000 x 6000 Gauss 300.27 159.83 159.74 59.40 Russian 97.02 58.43 58.38 22.21 Ratio 3.095 2.735 2.736 2.674 8000 x 8000 Gauss 697.20 371.34 371.86 135.20 Russian 225.19 136.76 135.21 51.30 Ratio 3.096 2.715 2.750 2.635 Table 7: Optimization Level 3, Flexible k Dimension 4,000 8,000 12,000 16,000 20,000 24,000 28,000 32,000 Gaussian 19.00 138.34 444.53 1033.50 2022.29 3459.77 5366.62 8061.90 7 7.64 – – – – – – – 8 7.09 51.78 – – – – – – 9 6.90 48.83 159.69 364.74 698.67 1195.78 – – 10 7.05 47.31 151.65 342.75 651.63 1107.17 1740.58 2635.64 11 7.67 48.08 149.46 332.37 622.86 1051.25 1640.63 2476.58 12 – 52.55 155.51 336.11 620.35 1032.38 1597.98 2397.45 13 – – 175.47 364.22 655.40 1073.45 1640.45 2432.18 14 – – – – – – 1822.93 2657.26 Min 6.90 47.31 149.46 332.37 620.35 1032.38 1597.98 2397.45 Gauss/M4RI 2.75 2.92 2.97 3.11 3.26 3.35 3.36 3.36 20 (PDF p. 16)

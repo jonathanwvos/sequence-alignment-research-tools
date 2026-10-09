@@ -1,0 +1,33 @@
+test_id,family,applicability,specification
+T01,representation,Any lossless encoding,"Encode/decode round trips including empty input, ambiguous symbols, maximum run counts and non-ASCII if supported; compare decoded symbols exactly."
+T02,compressed_compute,Direct compressed algorithms,Compare with a small uncompressed oracle; vary raw lengths independently of run counts; include equal symbols across run boundaries.
+T03,lossy_transform,HPC sketches pooling or quantization,Construct distinct inputs that collapse to the same representation; document lost information and test the promised transformed-domain result only.
+T04,entity_comparator,Any entity comparator,Check the exact truth table or score table; test ambiguity A/N/C and directionality; assert symmetry or transitivity only when promised.
+T05,objective,Exact scalar objective,Use exhaustive tiny inputs and an independent simple reference under identical scoring and boundaries; include empty inputs and no matches.
+T06,lcs_witness,One or more LCS strings,Each witness is a subsequence of both inputs and has the optimal length; AG versus GA permits A or G; one-witness methods need not return both.
+T07,enumeration,All distinct strings or positional solutions,Exhaustively enumerate the declared universe on tiny inputs; AA versus A has one distinct LCS string but two position alignments; check duplicates and completion flags.
+T08,empty_output,Alignment or enumeration output,Distinguish no feasible solution from one empty optimal solution and from not computed; normalize [] versus [empty string] only under an explicit contract.
+T09,boundaries,Local global or free-end alignment,Use prefix/suffix overhangs in both orientations to check all four free-end flags and local restart; include all-negative local scores.
+T10,gap_formula,Affine or piecewise gap costs,Gaps of lengths 1 2 and 3 distinguish open+(k-1)*extend from open+k*extend; probe piecewise switch points and insertion/deletion asymmetry.
+T11,traceback,Witness reconstruction,"Rescore the returned path under the declared recurrence; check coordinates, consumed input, legal transitions and endpoint consistency; inspect published corrections first."
+T12,space,Linear-space or output-sensitive claims,Measure auxiliary storage separately from input and outputs; compare score-only and traceback configurations and vary output count.
+T13,banding,Banded algorithms,"Place the optimum outside an initial band; verify certificate, expansion or fallback when exactness is claimed; otherwise measure the lost quality."
+T14,pruning,A* or pruning with exactness claim,"Compare against an exhaustive oracle on tiny states; test lower-bound admissibility and consistency if required, tie priorities, and discarded-state safety."
+T15,dag,Sequence-to-DAG methods,"Test linear-path reduction, branches, merges, disconnected nodes and alternate paths spelling identical strings; check permitted source/sink choices."
+T16,cycles,Cyclic graph alignment,"Use self-loops and repeated traversals; test termination and finite optimum assumptions, walk limits and zero-cost cycles; compare with a bounded oracle only where sufficient."
+T17,graph_semantics,Bidirected or haplotype graphs,Test reverse orientation and path restrictions; distinguish a graph-permitted recombinant walk from an allowed haplotype path.
+T18,graph_construction,Sequence-to-graph conversion or progressive POA,"Recover supported input paths; check labels, reachability, topology and update invariants; vary insertion order without assuming globally optimal MSA."
+T19,smooth_dp,Differentiable DP,Compare gradients with finite differences on small cases away from nondifferentiable points; vary smoothing temperature; check stable logsumexp and masks.
+T20,optimal_transport,OT based comparison or alignment,"Check nonnegative plans, required marginals or relaxed-marginal constraints, solver residuals and tolerance; inspect mass and order constraints separately."
+T21,metric_axioms,Claimed metric or pseudometric,"Test nonnegativity, symmetry, self-distance and triangle inequality; enforce identity of indiscernibles only for a metric; tests cannot prove the axioms universally."
+T22,embeddings,Learned or fixed embeddings,"Pin weights, layer, pooling, normalization and windows; test padding/truncation effects, repeated input determinism and symbol mapping."
+T23,learning_evaluation,Learned components,"Separate train/validation/test data with relevant homology or temporal controls; check preprocessing leakage, frozen versus tuned weights and unseen-length behavior."
+T24,numeric,Packed integer or floating computations,"Probe saturation, overflow and representable limits; compare higher precision; check documented fallback and tie changes within tolerance."
+T25,parallel,SIMD GPU threads or distributed,"Compare outputs across thread counts and batch boundaries; test SIMD tails, ragged inputs, races and deterministic ties where promised."
+T26,performance,Any performance comparison,"Fix output contract and hardware; time preprocessing, transfers, kernel, reconstruction and serialization; report warmup, repetition, RSS/VRAM and output bytes."
+T27,sketches,Random sketches or sampling,"Use tiny exact-set oracles, fixed seeds and replicated trials; quantify estimator error and probability rather than demanding exact alignment scores."
+T28,profiles_msa,Profile or multiple sequence alignment,"Verify consistent columns, preserved residue order, gap handling and the stated objective; distinguish sum-of-pairs optimization from reference SP/TC accuracy measures."
+T29,lis,Longest increasing subsequence,Check increasing order and strict versus nondecreasing semantics; respect the paper's distinct-element assumption; separate a length from a reconstructed witness.
+T30,restricted_costs,Tabulation or specialized edit solvers,Test the supported finite alphabet and discrete cost constraints; reject or route unsupported configurations explicitly; include LCS scoring only with a documented reduction.
+T31,pipeline_guarantee,Heuristic pipeline with an exact kernel,Test kernel optimality separately from seed selection and candidate recall; never infer whole-pipeline exactness from extension correctness.
+T32,reproducibility,Paper to implementation linkage,"Pin paper version, errata, source hash, implementation commit, config and data checksum; identify local modifications and incomplete outputs explicitly."

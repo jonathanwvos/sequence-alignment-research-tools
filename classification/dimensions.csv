@@ -1,0 +1,69 @@
+group,dimension,priority,definition,allowed_values
+01 Purpose,task.role,screen,Primary scientific or computational role,alignment|distance_estimation|homology_search|read_mapping|assembly|variant_calling|clustering|classification|structured_prediction|motif_search|gene_finding|phylogeny|data_storage_coding|error_correction
+01 Purpose,task.arity,screen,Number and kind of inputs to this stage,single_sequence|sequence_sequence|sequence_profile|profile_profile|multiple_sequences|sequence_graph|graph_graph|sequence_database
+02 Entities,entity.domain,screen,What the symbols describe,abstract_symbols|text|binary_data|dna|rna|protein|codons|time_series|speech|music|events|structures|distributions
+02 Entities,entity.alphabet,detail,Mathematical alphabet assumed by the method,binary|fixed_finite|variable_finite|ordered|unbounded_discrete|continuous|set_valued|probabilistic
+02 Entities,entity.unit,detail,Unit compared or traversed,character|base|amino_acid|codon|kmer|run|word_token|sample|event|vector|distribution|graph_node
+03 Representations,representation.symbol,screen,In-memory representation of a single entity,character|integer_id|bit_packed|bit_set|one_hot|probability_vector|dense_vector|run_pair|structured_object
+03 Representations,representation.sequence,detail,Logical representation of an entire sequence,array|string|run_list|sparse_matrix|dense_matrix|tensor|profile|graph|sketch|embedding_vector|grammar
+03 Representations,representation.invariance,detail,Equivalences deliberately introduced by a transform,lossless|homopolymer_collapse|reverse_complement_canonical|case_fold|quantized|order_discarded|learned_lossy
+04 Storage,storage.scheme,screen,Physical compression separate from entity meaning,uncompressed|rle|bit_packing|delta|grammar_slp|lz|bwt|entropy|general_archive|succinct_graph
+04 Storage,storage.compute_domain,screen,How computation interacts with compression,uncompressed|direct_compressed|decompress_then_compute|compressed_seeds_only|mixed
+04 Storage,storage.container,detail,File or interchange format; not an algorithmic encoding,fasta|fastq|gfa|sam_bam_cram|vcf|stockholm|csv_json|binary_custom
+05 Preprocessing,preprocess.transform,detail,Input transformation or reusable intermediate,none|tokenize|rle|homopolymer_collapse|reverse_complement|translation|masking|normalization|embedding|index_build|match_matrix|fft
+05 Preprocessing,preprocess.index,detail,Search or lookup structure built before queries,none|hash_kmer|minimizer|syncmer|strobemer|suffix_array|suffix_tree|fm_index|automaton|sketch|ann|lookup_blocks
+05 Preprocessing,preprocess.reuse,detail,Scope over which preprocessing cost is amortized,per_input|per_pair|per_database|per_batch|offline_training
+06 Entity comparator,entity_cmp.family,screen,Function applied to entities or entity contexts,equality|set_overlap|ordering|substitution_table|position_specific|dot_product|cosine|lp_distance|kernel|learned|likelihood
+06 Entity comparator,entity_cmp.codomain,detail,Type returned by the entity comparator,boolean|integer|real|probability|vector|set
+06 Entity comparator,entity_cmp.context,detail,Context needed to evaluate one entity pair,context_free|position_dependent|neighborhood|whole_sequence|cross_sequence|profile_conditioned
+06 Entity comparator,entity_cmp.property,detail,Established property of this exact comparator,symmetric|asymmetric|reflexive|transitive|nonnegative|identity_of_indiscernibles|triangle_inequality
+07 Sequence comparator,sequence_cmp.family,screen,Aggregation or comparison at the sequence level,lcs_length|lis_length|edit_distance|alignment_score|percent_identity|dtw|soft_dtw|optimal_transport|jaccard|minhash_estimate|embedding_distance|likelihood|phylogenetic_distance
+07 Sequence comparator,sequence_cmp.property,detail,Established property of the sequence function,symmetric|asymmetric|nonnegative|zero_self|identity_of_indiscernibles|triangle_inequality|metric|pseudometric|divergence|similarity_only
+08 Objective,objective.problem,screen,Mathematical target; keep distinct from application and validation metric,lcs|longest_common_substring|lis|edit_distance|weighted_alignment|dtw|optimal_transport|viterbi|partition_function|sum_of_pairs|tree_alignment|constrained_coding|retrieval
+08 Objective,objective.optimization,detail,Operation defining the target result,maximize|minimize|marginalize|count|enumerate|multiobjective
+08 Objective,objective.constraint,detail,Restrictions beyond ordinary boundary conditions,unrestricted|anchors|band|collinearity|splicing|frameshifts|rearrangements|circular|motifs|haplotype_paths|length_bound
+09 Alignment scope,alignment.boundary,screen,Start/end policy; exact four-end flags also belong in the contract,global|local|semiglobal|overlap|prefix|infix|custom
+09 Alignment scope,alignment.multiplicity,detail,Alignment participation at the entity level,one_to_one|one_to_many|many_to_many|unaligned_allowed
+09 Alignment scope,alignment.strategy,detail,How multiple sequences or profiles are assembled,direct_pairwise|progressive|guide_tree|iterative_refinement|consistency|center_star|joint_optimization|template_based
+10 Scoring,scoring.substitution,screen,Source and structure of replacement scores,unit|match_mismatch|arbitrary_table|pam|blosum|pssm|contextual|learned|quality_aware
+10 Scoring,scoring.gap,screen,Gap cost function class; save formula and parameter convention,none|unit|linear|affine|two_piece_affine|convex|concave|arbitrary|learned|splice_specific
+10 Scoring,scoring.operation,detail,Allowed elementary operations,match|substitution|insertion|deletion|transposition|duplication|reversal|splice|frameshift
+10 Scoring,scoring.scale,detail,Score sign and calibration conventions,nonnegative_cost|signed_reward|log_odds|probability|normalized|unnormalized
+11 Solver,solver.family,screen,Main computational mechanism,dynamic_programming|lis_reduction|binary_search|four_russians|bit_parallel|wavefront_alignment|a_star|dijkstra|flow|optimal_transport|sinkhorn|fft|automaton|branch_and_bound|ilp|sat|maximum_clique|greedy|metaheuristic|neural_inference
+12 Dynamic programming,dp.state,screen,Meaning and domain of accumulated states,grid|multidimensional_grid|sparse_matches|score_frontier|graph_product|profile_states|intervals|subsets
+12 Dynamic programming,dp.algebra,detail,Combination/reduction operators; formula remains authoritative,min_plus|max_plus|sum_product|logsumexp|smoothed_max|smoothed_min|boolean|counting|pareto
+12 Dynamic programming,dp.layout,detail,State storage and compression scheme,full_table|rolling_rows|rolling_columns|checkpoint|divide_conquer|bit_vector|blocked|tabulated|frontier|sparse|tensor
+12 Dynamic programming,dp.schedule,detail,Dependency-respecting evaluation order,row_major|column_major|antidiagonal|score_order|topological|best_first|recursive|blocked
+12 Dynamic programming,dp.differentiation,screen,What is differentiated and at which stage,none|score_gradient|soft_solution|hard_solution_surrogate|implicit_gradient|train_only|inference_time
+13 Reconstruction,trace.method,screen,Method used to recover solutions after or during scoring,none|parent_pointers|recompute|divide_conquer|checkpoint|backward_dp|graph_search|enumeration|sample_posterior
+13 Reconstruction,trace.tie_policy,detail,Behavior when multiple optima exist,arbitrary_one|deterministic_one|all_distinct_strings|all_position_alignments|all_graph_paths|top_k|sampled|capped
+14 Graphs,graph.role,screen,Why a graph exists; role claims must name the graph,input_reference|implicit_edit_state|explicit_match_intermediate|alignment_output|guide_tree|probabilistic_model|search_index
+14 Graphs,graph.topology,screen,Supported topology of the named graph,path|tree|dag|directed_cyclic|bidirected|undirected|hypergraph
+14 Graphs,graph.label,detail,What graph nodes or edges carry,base|string|profile|coordinate|score|unlabelled
+14 Graphs,graph.path_semantics,detail,Which traversals constitute admissible solutions,arbitrary_walk|simple_path|haplotype_restricted|dag_path|bounded_unrolling|orientation_aware
+15 Graph operations,graph.construct,screen,Conversion between sequences and graph representations,sequence_to_path|progressive_poa|de_bruijn|overlap_graph|variation_graph|match_to_graph|edit_graph|assembly|graph_update
+15 Graph operations,graph.traversal,screen,Traversal algorithm used at the named stage,topological|bfs|dfs|dijkstra|a_star|best_first|wavefront|dynamic_programming|branch_and_bound
+15 Graph operations,graph.traversal_purpose,detail,"Purpose of traversal, independent of algorithm",construction|scoring|search|reconstruction|enumeration|reachability
+16 Heuristics,heuristic.kind,screen,"Search guidance, reductions or approximations",none|seeding|chaining|banding|adaptive_band|x_drop|z_drop|beam|greedy|learned|progressive|randomized|admissible_bound|safe_pruning|genetic|ant_colony
+16 Heuristics,heuristic.safeguard,detail,"Why pruning or restricted search preserves a claim, if applicable",none|admissibility_proof|bound_certificate|band_doubling|exact_fallback|exhaustive_completion|error_bound
+17 Guarantees,guarantee.kind,screen,"Guarantee for this objective, stage and configuration",exact|exact_restricted|bounded_approximation|probabilistic|heuristic|numerical_approximation|empirical_only
+17 Guarantees,guarantee.evidence,detail,"Kind of justification, not review completeness",proof|stated_theorem|empirical_validation|author_claim|independent_replication
+18 Embeddings,embedding.level,screen,Object mapped into a vector space,entity|contextual_entity|sequence|profile|graph|structure
+18 Embeddings,embedding.source,screen,Origin of representation,handcrafted|physicochemical|spectral|geometric|trained_task|protein_language_model|general_language_model|random_projection
+18 Embeddings,embedding.use,detail,Role of an embedding in the pipeline,entity_score|sequence_score|seeding|retrieval|clustering|prediction|alignment_training
+19 Learning,learning.regime,screen,How learned components are obtained,none|supervised|self_supervised|unsupervised|contrastive|reinforcement|fine_tuned|frozen_pretrained
+19 Learning,learning.component,detail,Part of the method learned or trained,embedding|substitution|gap|heuristic|alignment|objective|graph|classifier
+19 Learning,learning.alignment_form,detail,Type of alignment used in learning,hard|soft|latent|supervised|surrogate
+20 Parallelism,parallel.level,screen,Independent or scheduled work exposed in this configuration,bit_parallel|simd|entity_pairs|dp_antidiagonals|dp_tiles|frontiers|graph_partitions|sequence_pairs|database_shards|training_batches
+20 Parallelism,parallel.backend,screen,Target execution architecture,cpu_scalar|cpu_simd|cpu_threads|gpu|multi_gpu|distributed|fpga|asic|processing_in_memory
+20 Parallelism,parallel.communication,detail,Communication or synchronization costs to record,none|barriers|atomics|warp_shuffle|host_device|device_device|network
+21 Numerics and resources,numeric.type,detail,Score/value arithmetic and exactness limits,arbitrary_integer|fixed_integer|float16|bfloat16|float32|float64|fixed_point|boolean
+21 Numerics and resources,numeric.policy,detail,"Overflow, rounding and reproducibility behavior",exact_range|saturating|overflow_detected|precision_fallback|rounding|tolerance|deterministic|nondeterministic
+21 Numerics and resources,resource.model,detail,Computational cost model,comparison|word_ram|bit_complexity|external_memory|parallel_work_span|gpu_device
+21 Numerics and resources,resource.parameter,detail,Parameters required to interpret stated complexity,raw_lengths|run_counts|alphabet_size|match_count|optimal_score|edit_bound|word_bits|embedding_dim|nodes|edges|sequence_count|output_size|batch_size
+22 Outputs,output.kind,screen,"Native returned object, not what could be added later",score|length|one_subsequence|one_alignment|all_distinct_subsequences|all_position_alignments|graph_path|graph_walk|alignment_graph|cigar|endpoints|ranking|soft_matrix|posterior|gradient|count|embedding
+22 Outputs,output.completeness,screen,Coverage of the declared output universe,score_only|one_optimum|all_optima|top_k|sampled|bounded|capped|approximate
+23 Evaluation,evaluation.target,detail,"What empirical validation measures, separate from objective",score_correctness|witness_validity|enumeration_completeness|alignment_accuracy|homology_accuracy|mapping_accuracy|retrieval_accuracy|downstream_task|runtime|memory|energy
+23 Evaluation,evaluation.measure,detail,Named evaluation measure; store denominator and dataset in contract,exact_agreement|precision|recall|f1|auroc|auprc|sp_score|tc_score|rmsd|percent_identity|edit_error_rate|wall_time|throughput|gcups|rss|vram|output_bytes|energy
+24 Reproducibility,artifact.kind,detail,Available resources for the paper or implementation,paper|source_code|binary|container|dataset|benchmark_manifest|weights|proof|erratum
+24 Reproducibility,artifact.availability,detail,"Access state of the named resource, not paper validity",local|public|subscription|request_only|unavailable

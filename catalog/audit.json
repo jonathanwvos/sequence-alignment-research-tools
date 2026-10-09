@@ -1,0 +1,155 @@
+{
+  "pdf_count": 255,
+  "work_count": 257,
+  "bibliography_count": 114,
+  "missing_bibliography": [
+    "b-7b22f39a08f1",
+    "b-a2129eaaa954",
+    "b-7b08917590ad",
+    "b-4dada11de8cc",
+    "b-1298c02f31ac"
+  ],
+  "duplicate_candidates": [
+    {
+      "work_id": "b-f406af24cd22",
+      "assets": [
+        "a-b8da7b58c5f0dbd2",
+        "a-28c049f09ba7dc6f"
+      ]
+    },
+    {
+      "work_id": "w-b7868c262ba9",
+      "assets": [
+        "a-b7868c262ba9fc83",
+        "a-9136bb00b1bc7c90"
+      ]
+    },
+    {
+      "work_id": "w-a89ca693d46b",
+      "assets": [
+        "a-a89ca693d46b8044",
+        "a-159c225518893e41"
+      ]
+    }
+  ],
+  "extraction_issues": [
+    {
+      "asset_id": "a-73e5ca87798113ca",
+      "path": "literature/academic-papers-processed/A Distributed System for Fast Alignment of Next-Generation Sequencing Data.pdf",
+      "issue": "No reference list found in extracted text"
+    },
+    {
+      "asset_id": "a-f850d6528541c068",
+      "path": "literature/academic-papers-processed/A draft human pangenome reference.pdf",
+      "issue": "No reference list found in extracted text"
+    },
+    {
+      "asset_id": "a-13c35538ece39782",
+      "path": "literature/academic-papers-processed/Fast and Flexible String Matching by Combining Bit-parallelism and Suffix Automata - Navarro, Raffinot.pdf",
+      "issue": "No reference list found in extracted text"
+    },
+    {
+      "asset_id": "a-bf6a6b1efd9420bc",
+      "path": "literature/academic-papers-processed/Fast and sensitive multiple sequence alignments on a microcomputer - Higgins, Sharp.pdf",
+      "issue": "Reference list could not be separated into entries"
+    },
+    {
+      "asset_id": "a-4dfea2a0db47d11c",
+      "path": "literature/academic-papers-processed/Measuring the distance between multiple sequence alignments - Blackburne, Whelan.pdf",
+      "issue": "Reference list could not be separated into entries"
+    },
+    {
+      "asset_id": "a-e7ecbd1d886d2596",
+      "path": "literature/academic-papers-processed/Mugsy: fast multiple alignment of closely related whole genomes - Angiuoli, Salzberg.pdf",
+      "issue": "Reference list could not be separated into entries"
+    },
+    {
+      "asset_id": "a-159c225518893e41",
+      "path": "literature/academic-papers-processed/On the Economical Construction of the Transitive Closure of a Directed Graph - Arlazarov et al (Russian Original).pdf",
+      "issue": "No reference list found in extracted text"
+    },
+    {
+      "asset_id": "a-265b4e0f88f84985",
+      "path": "literature/academic-papers-processed/Optimal Gap-Affine Alignment in O(s) Space - Marco-Sola et al.pdf",
+      "issue": "Reference list could not be separated into entries"
+    },
+    {
+      "asset_id": "a-d3f4a6cd267e6bbf",
+      "path": "literature/academic-papers-processed/Profile hidden Markov models.pdf",
+      "issue": "Reference list could not be separated into entries"
+    },
+    {
+      "asset_id": "a-b0a5257093adba46",
+      "path": "literature/academic-papers-processed/Protein homology detection by HMM–HMM comparison.pdf",
+      "issue": "Reference list could not be separated into entries"
+    },
+    {
+      "asset_id": "a-0374b2b14d26f50b",
+      "path": "literature/academic-papers-processed/Rapid and Sensitive Protein Similarity Searches.pdf",
+      "issue": "No reference list found in extracted text"
+    },
+    {
+      "asset_id": "a-bfb165a8876f1d1f",
+      "path": "literature/academic-papers-processed/The Physical Origin of Intrinsic Bends in Double Helical DNA - Mazur.pdf",
+      "issue": "No reference list found in extracted text"
+    }
+  ],
+  "ambiguous_references": [
+    "a-0faa17e6272ac412-r0027",
+    "a-8fe261746ad36fb0-r0009",
+    "a-8fe261746ad36fb0-r0012",
+    "a-75b96ca5a351cca4-r0001",
+    "a-75b96ca5a351cca4-r0002",
+    "a-b69bd5c105073ded-r0001",
+    "a-284d3d8a300f8306-r0002",
+    "a-725d0c0e17f1af54-r0003",
+    "a-79dc1926ba724d25-r0002",
+    "a-79dc1926ba724d25-r0003",
+    "a-edae542151ea7a05-r0001",
+    "a-9848a472ab4eedb8-r0033",
+    "a-69afd8cbcd498251-r0001",
+    "a-69afd8cbcd498251-r0002",
+    "a-bcf3c1fc99e58ce1-r0003",
+    "a-bcf3c1fc99e58ce1-r0004",
+    "a-bcf3c1fc99e58ce1-r0006",
+    "a-bcf3c1fc99e58ce1-r0007",
+    "a-b7b46a51b3466467-r0001",
+    "a-70e3f09b054213e5-r0002",
+    "a-70e3f09b054213e5-r0007",
+    "a-70e3f09b054213e5-r0008",
+    "a-c8ef0318080d63c8-r0002",
+    "a-099be045515edb79-r0001",
+    "a-8269f064a2560f37-r0002",
+    "a-8269f064a2560f37-r0003",
+    "a-ba4881c8127fa7be-r0002",
+    "a-fcc9ef4a889fa900-r0002",
+    "a-480992a1e414d926-r0001",
+    "a-480992a1e414d926-r0003",
+    "a-480992a1e414d926-r0004",
+    "a-86661fea5b9088ed-r0022",
+    "a-debfcabc2c739800-r0002",
+    "a-b7e752e7c7af28d8-r0001",
+    "a-3929ce6da70ea19c-r0001",
+    "a-6385178794f46cae-r0002",
+    "a-6385178794f46cae-r0004",
+    "a-df1101e677753cb1-r0002",
+    "a-53dc65bd768ec559-r0002",
+    "a-19e0e230e477a2cc-r0006",
+    "a-e2a9fb43245c4bbb-r0002",
+    "a-ed715ff310645231-r0002",
+    "a-13b12c6d83d9f8b0-r0001",
+    "a-8b5b902a7958e49c-r0004",
+    "a-8b5b902a7958e49c-r0007",
+    "a-2ef4895ce616ab57-r0002",
+    "a-2ef4895ce616ab57-r0003",
+    "a-63bbf4f766eff25c-r0004",
+    "a-594e6dbb5528d2ac-r0001",
+    "a-594e6dbb5528d2ac-r0002",
+    "a-594e6dbb5528d2ac-r0003",
+    "a-ba875adcd47ad505-r0001",
+    "a-ba875adcd47ad505-r0002",
+    "a-0354638beb893580-r0002"
+  ],
+  "reference_count": 7532,
+  "matched_reference_count": 741
+}

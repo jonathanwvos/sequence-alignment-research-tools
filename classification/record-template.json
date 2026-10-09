@@ -1,0 +1,748 @@
+{
+  "schema_version": "1.0",
+  "record_id": "REPLACE_WITH_RECORD_ID",
+  "paper_key": null,
+  "work": {
+    "title": "REPLACE_WITH_PAPER_TITLE",
+    "year": null,
+    "version": null,
+    "resource_type": "unknown"
+  },
+  "variant": {
+    "name": "REPLACE_WITH_VARIANT",
+    "stage": "unknown",
+    "realization": "paper",
+    "configuration_notes": ""
+  },
+  "review": {
+    "status": "unscreened",
+    "coverage": "partial",
+    "implementation_approval": "not_requested",
+    "priority": {
+      "relevance": "unassessed",
+      "evidence_readiness": "unassessed",
+      "comparison_compatibility": "unassessed",
+      "mechanism_novelty": "unassessed",
+      "implementation_effort": "unassessed",
+      "dependency_readiness": "unassessed",
+      "oracle_readiness": "unassessed",
+      "resource_fit": "unassessed"
+    },
+    "rationale": ""
+  },
+  "source_ids": [],
+  "claims": [
+    {
+      "dimension": "task.role",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "task.arity",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "entity.domain",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "entity.alphabet",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "entity.unit",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "representation.symbol",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "representation.sequence",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "representation.invariance",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "storage.scheme",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "storage.compute_domain",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "storage.container",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "preprocess.transform",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "preprocess.index",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "preprocess.reuse",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "entity_cmp.family",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "entity_cmp.codomain",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "entity_cmp.context",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "entity_cmp.property",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "sequence_cmp.family",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "sequence_cmp.property",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "objective.problem",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "objective.optimization",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "objective.constraint",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "alignment.boundary",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "alignment.multiplicity",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "alignment.strategy",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "scoring.substitution",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "scoring.gap",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "scoring.operation",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "scoring.scale",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "solver.family",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "dp.state",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "dp.algebra",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "dp.layout",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "dp.schedule",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "dp.differentiation",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "trace.method",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "trace.tie_policy",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "graph.role",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "graph.topology",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "graph.label",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "graph.path_semantics",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "graph.construct",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "graph.traversal",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "graph.traversal_purpose",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "heuristic.kind",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "heuristic.safeguard",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "guarantee.kind",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "guarantee.evidence",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "embedding.level",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "embedding.source",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "embedding.use",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "learning.regime",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "learning.component",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "learning.alignment_form",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "parallel.level",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "parallel.backend",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "parallel.communication",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "numeric.type",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "numeric.policy",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "resource.model",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "resource.parameter",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "output.kind",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "output.completeness",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "evaluation.target",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "evaluation.measure",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "artifact.kind",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    },
+    {
+      "dimension": "artifact.availability",
+      "values": [],
+      "status": "unverified",
+      "basis": "unassessed",
+      "source_ids": [],
+      "locator": null,
+      "condition": null,
+      "notes": ""
+    }
+  ],
+  "contracts": {
+    "entity_comparator": null,
+    "sequence_comparator": null,
+    "objective_formula": null,
+    "scoring_parameters": null,
+    "gap_formula": null,
+    "operation_constraints": null,
+    "representation_details": null,
+    "graph_identity_and_paths": null,
+    "output_semantics": null,
+    "numeric_policy": null,
+    "embedding_specification": null,
+    "training_and_data": null,
+    "evaluation_protocol": null,
+    "preprocessing_and_resources": null,
+    "boundaries": {
+      "free_query_prefix": null,
+      "free_query_suffix": null,
+      "free_target_prefix": null,
+      "free_target_suffix": null,
+      "local_restart": null
+    }
+  },
+  "complexity": [],
+  "test_ids": [],
+  "relations": [],
+  "implementation_identity": {
+    "repository": null,
+    "revision": null,
+    "exec_str": null,
+    "parent_record_id": null
+  }
+}

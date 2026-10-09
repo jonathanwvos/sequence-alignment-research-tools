@@ -1,0 +1,1074 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>VALA literature reports</title>
+  <style>
+    :root {
+      --ink: #18211c;
+      --muted: #68726c;
+      --paper: #fffdf8;
+      --line: #d3dbd3;
+      --accent: #175c45;
+      --accent-soft: #dcebe4;
+      --approved: #18794e;
+      --approved-soft: #dff3e8;
+      --rejected: #a33a31;
+      --rejected-soft: #f7e4e1;
+      --uncertain: #9a650d;
+      --uncertain-soft: #f8edcf;
+      --future-work: #4e55a5;
+      --future-work-soft: #e8e8f8;
+      --phase-1: #1769aa;
+      --phase-1-soft: #e1effa;
+      --phase-2: #76519b;
+      --phase-2-soft: #eee7f5;
+      --phase-3: #59636d;
+      --phase-3-soft: #e9edf0;
+      --priority-low: #59636d;
+      --priority-low-soft: #e9edf0;
+      --priority-medium: #9a650d;
+      --priority-medium-soft: #f8edcf;
+      --priority-high: #a33a31;
+      --priority-high-soft: #f7e4e1;
+      --shadow: 0 18px 50px rgba(30, 49, 39, .10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255,255,255,.92), transparent 28rem),
+        linear-gradient(135deg, #e5ece7 0%, #eef0e7 100%);
+      font: 16px/1.62 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, select { font: inherit; }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(24, 33, 28, .13);
+      background: rgba(245, 248, 243, .92);
+      backdrop-filter: blur(16px);
+    }
+
+    .header-inner {
+      width: min(1400px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 14px 0 12px;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 11px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand strong {
+      color: var(--accent);
+      font: 800 1.18rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .12em;
+    }
+
+    .brand span, .counter {
+      color: var(--muted);
+      font-size: .84rem;
+      letter-spacing: .03em;
+    }
+
+    .collection-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 11px;
+      padding: 4px;
+      width: fit-content;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .68);
+    }
+
+    .collection-tab {
+      min-height: 34px;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 7px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-size: .84rem;
+      font-weight: 750;
+    }
+
+    .collection-tab:hover { color: var(--ink); }
+    .collection-tab.is-active {
+      color: var(--accent);
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(24, 33, 28, .12);
+    }
+
+    .collection-tab:focus-visible {
+      outline: 3px solid rgba(23, 92, 69, .24);
+      outline-offset: 2px;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: auto minmax(240px, 1fr) auto auto auto auto auto;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-button, .status-button, .phase-button, .priority-button, select {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      color: var(--ink);
+      background: #fff;
+      box-shadow: 0 1px 1px rgba(0,0,0,.03);
+    }
+
+    .nav-button, .status-button, .phase-button, .priority-button {
+      cursor: pointer;
+      padding: 0 14px;
+      font-weight: 700;
+    }
+
+    .nav-button:hover, .status-button:hover, .phase-button:hover, .priority-button:hover, select:hover { border-color: #9eaaa2; }
+    .nav-button:focus-visible, .status-button:focus-visible, .phase-button:focus-visible, .priority-button:focus-visible, select:focus-visible {
+      outline: 3px solid rgba(23, 92, 69, .24);
+      outline-offset: 2px;
+    }
+
+    select {
+      width: 100%;
+      padding: 0 38px 0 12px;
+      text-overflow: ellipsis;
+    }
+
+    .sort-order { min-width: 155px; }
+
+    .status-button {
+      min-width: 150px;
+      border-color: currentColor;
+    }
+
+    .status-button[data-status="approved"] { color: var(--approved); background: var(--approved-soft); }
+    .status-button[data-status="rejected"] { color: var(--rejected); background: var(--rejected-soft); }
+    .status-button[data-status="uncertain"] { color: var(--uncertain); background: var(--uncertain-soft); }
+    .status-button[data-status="future-work"] { color: var(--future-work); background: var(--future-work-soft); }
+
+    .phase-controls, .priority-controls {
+      display: flex;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .phase-button {
+      min-width: 70px;
+      border: 0;
+      border-right: 1px solid var(--line);
+      border-radius: 0;
+      color: var(--muted);
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .phase-button:last-child { border-right: 0; }
+    .phase-button[data-phase="1"].is-active { color: var(--phase-1); background: var(--phase-1-soft); }
+    .phase-button[data-phase="2"].is-active { color: var(--phase-2); background: var(--phase-2-soft); }
+    .phase-button[data-phase="3"].is-active { color: var(--phase-3); background: var(--phase-3-soft); }
+
+    .priority-button {
+      min-width: 68px;
+      border: 0;
+      border-right: 1px solid var(--line);
+      border-radius: 0;
+      color: var(--muted);
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .priority-button:last-child { border-right: 0; }
+    .priority-button[data-priority="low"].is-active { color: var(--priority-low); background: var(--priority-low-soft); }
+    .priority-button[data-priority="medium"].is-active { color: var(--priority-medium); background: var(--priority-medium-soft); }
+    .priority-button[data-priority="high"].is-active { color: var(--priority-high); background: var(--priority-high-soft); }
+
+    .keyboard-help {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    kbd {
+      display: inline-block;
+      min-width: 1.65em;
+      margin-right: 4px;
+      padding: 1px 5px;
+      border: 1px solid #c7cec8;
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      color: #344139;
+      background: #fff;
+      font: 700 .72rem/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+      text-align: center;
+    }
+
+    main {
+      width: min(980px, calc(100% - 32px));
+      margin: 34px auto 72px;
+    }
+
+    .review-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: .84rem;
+    }
+
+    .resource-details {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 8px 14px;
+    }
+
+    .resource-details > span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .resource-link {
+      flex: none;
+      color: var(--accent);
+      font-weight: 750;
+      text-decoration-thickness: .08em;
+      text-underline-offset: .16em;
+    }
+
+    .resource-link:hover { color: #0e4432; }
+    .resource-link:focus-visible {
+      border-radius: 3px;
+      outline: 3px solid rgba(23, 92, 69, .24);
+      outline-offset: 3px;
+    }
+
+    .review-summary { display: grid; gap: 2px; text-align: right; }
+    .status-summary span, .phase-summary span, .priority-summary span { white-space: nowrap; }
+
+    .report {
+      position: relative;
+      min-height: 65vh;
+      padding: clamp(28px, 5vw, 68px);
+      overflow: hidden;
+      border: 1px solid rgba(24, 33, 28, .11);
+      border-radius: 16px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .report::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--status-color, var(--approved));
+    }
+
+    .report[data-status="approved"] { --status-color: var(--approved); }
+    .report[data-status="rejected"] { --status-color: var(--rejected); }
+    .report[data-status="uncertain"] { --status-color: var(--uncertain); }
+    .report[data-status="future-work"] { --status-color: var(--future-work); }
+
+    .report h1, .report h2, .report h3 {
+      color: #17241d;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.2;
+    }
+
+    .report h1 {
+      max-width: 18em;
+      margin: 0 0 1.2em;
+      font-size: clamp(2rem, 5vw, 3.45rem);
+      font-weight: 650;
+      letter-spacing: -.035em;
+    }
+
+    .report h2 {
+      margin: 2.25em 0 .7em;
+      padding-bottom: .34em;
+      border-bottom: 1px solid var(--line);
+      font-size: 1.5rem;
+    }
+
+    .report h3 { margin: 1.7em 0 .5em; font-size: 1.14rem; }
+    .report p, .report li { max-width: 78ch; }
+    .report strong { color: #263a2f; }
+    .report a { color: var(--accent); text-decoration-thickness: .08em; text-underline-offset: .16em; }
+    .report code { padding: .12em .32em; border-radius: 4px; background: #edf0eb; font-size: .88em; }
+    .report pre { padding: 18px; overflow: auto; border-radius: 8px; background: #1f2823; color: #edf4ef; }
+    .report pre code { padding: 0; background: transparent; }
+    .report blockquote { margin-left: 0; padding-left: 18px; border-left: 4px solid var(--accent-soft); color: #506059; }
+
+    .report table {
+      display: table;
+      width: 100%;
+      margin: 1.15em 0 1.75em;
+      border-spacing: 0;
+      border-collapse: separate;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: .91rem;
+    }
+
+    .report th, .report td {
+      padding: 10px 12px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .report th:last-child, .report td:last-child { border-right: 0; }
+    .report tr:last-child td { border-bottom: 0; }
+    .report th { color: #2c4638; background: #edf3ee; font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; }
+    .report tbody tr:nth-child(even) { background: rgba(236, 240, 235, .48); }
+    .empty-state { padding: 80px 20px; text-align: center; color: var(--muted); }
+
+    @media (min-width: 761px) and (max-width: 1180px) {
+      .toolbar { grid-template-columns: auto minmax(220px, 1fr) auto auto; }
+      #previous { grid-column: 1; grid-row: 1; }
+      #report-picker { grid-column: 2; grid-row: 1; }
+      #sort-order { grid-column: 3; grid-row: 1; }
+      #next { grid-column: 4; grid-row: 1; }
+      .phase-controls { grid-column: 1; grid-row: 2; }
+      .priority-controls { grid-column: 2; grid-row: 2; justify-self: start; }
+      .status-button { grid-column: 3 / 5; grid-row: 2; }
+    }
+
+    @media (max-width: 760px) {
+      .masthead { align-items: flex-start; }
+      .brand { display: grid; gap: 4px; }
+      .collection-tabs { width: 100%; }
+      .collection-tab { flex: 1; }
+      .toolbar { grid-template-columns: 1fr 1fr; }
+      #report-picker { grid-column: 1 / -1; grid-row: 1; }
+      #sort-order { grid-column: 1 / -1; grid-row: 2; }
+      .phase-controls { grid-column: 1 / -1; grid-row: 3; }
+      .phase-button, .priority-button { flex: 1; }
+      .priority-controls { grid-column: 1 / -1; grid-row: 4; }
+      #previous { grid-column: 1; grid-row: 5; }
+      #next { grid-column: 2; grid-row: 5; }
+      .status-button { grid-column: 1 / -1; grid-row: 6; min-width: 0; }
+      .keyboard-help { display: none; }
+      main { margin-top: 20px; }
+      .review-strip { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .resource-details { align-items: flex-start; flex-direction: column; gap: 2px; }
+      .resource-details > span { white-space: normal; }
+      .review-summary { text-align: left; }
+      .report { padding: 28px 20px 40px; border-radius: 10px; }
+      .report table { display: block; overflow-x: auto; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .app-header, .review-strip { display: none; }
+      main { width: 100%; margin: 0; }
+      .report { padding: 0; border: 0; box-shadow: none; }
+      .report::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="masthead">
+        <div class="brand"><strong>VALA</strong><span>Literature summary reports</span></div>
+        <div class="counter" id="counter" aria-live="polite"></div>
+      </div>
+      <div class="collection-tabs" role="tablist" aria-label="Report collection">
+        <button class="collection-tab is-active" id="tab-literature" data-collection="literature" type="button" role="tab" aria-selected="true">Literature</button>
+        <button class="collection-tab" id="tab-reference" data-collection="reference" type="button" role="tab" aria-selected="false">Reference material</button>
+      </div>
+      <div class="toolbar" aria-label="Report controls">
+        <button class="nav-button" id="previous" type="button" aria-label="Previous report">← Previous</button>
+        <select id="report-picker" aria-label="Select a report"></select>
+        <select class="sort-order" id="sort-order" aria-label="Sort reports">
+          <option value="index">Index order</option>
+          <option value="date-desc">Date: newest first</option>
+          <option value="date-asc">Date: oldest first</option>
+        </select>
+        <div class="phase-controls" aria-label="Implementation phase" role="group">
+          <button class="phase-button" data-phase="1" type="button" title="Phase 1: immediate relevance">Phase 1</button>
+          <button class="phase-button" data-phase="2" type="button" title="Phase 2: supporting relevance">Phase 2</button>
+          <button class="phase-button" data-phase="3" type="button" title="Phase 3: later or reference work">Phase 3</button>
+        </div>
+        <div class="priority-controls" aria-label="Report priority" role="group">
+          <button class="priority-button" data-priority="low" type="button" title="Low priority (L)">Low</button>
+          <button class="priority-button" data-priority="medium" type="button" title="Medium priority (M)">Medium</button>
+          <button class="priority-button" data-priority="high" type="button" title="High priority (H)">High</button>
+        </div>
+        <button class="status-button" id="status" type="button" aria-label="Change review status"></button>
+        <button class="nav-button" id="next" type="button" aria-label="Next report">Next →</button>
+      </div>
+      <div class="keyboard-help" aria-label="Keyboard shortcuts">
+        <span><kbd>←</kbd>previous report</span>
+        <span><kbd>→</kbd>next report</span>
+        <span><kbd>Space</kbd>change status</span>
+        <span><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd>assign implementation phase</span>
+        <span><kbd>L</kbd><kbd>M</kbd><kbd>H</kbd>assign priority</span>
+        <span>Status order: Approved → Rejected → Uncertain → Future work</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="review-strip">
+      <div class="resource-details">
+        <span id="report-meta"></span>
+        <a class="resource-link" id="resource-link" href="#" target="_blank" rel="noreferrer"></a>
+      </div>
+      <div class="review-summary">
+        <span class="phase-summary" id="phase-summary"></span>
+        <span class="priority-summary" id="priority-summary"></span>
+        <span class="status-summary" id="status-summary"></span>
+      </div>
+    </div>
+    <article class="report" id="report" tabindex="-1"></article>
+  </main>
+
+  <script src="viewer-data/reports-00.js"></script>
+  <script src="viewer-data/reports-01.js"></script>
+  <script src="viewer-data/reports-02.js"></script>
+  <script src="viewer-data/reports-03.js"></script>
+  <script src="viewer-data/reports-04.js"></script>
+  <script src="viewer-data/reports-05.js"></script>
+  <script src="viewer-data/reports-06.js"></script>
+  <script src="viewer-data/reports-07.js"></script>
+  <script src="viewer-data/reports-08.js"></script>
+  <script src="viewer-data/reports-09.js"></script>
+  <script src="viewer-data/reports-10.js"></script>
+  <script src="viewer-data/reports-11.js"></script>
+  <script src="viewer-data/reports-12.js"></script>
+  <script src="viewer-data/reports-13.js"></script>
+  <script src="viewer-data/reports-14.js"></script>
+  <script src="viewer-data/reports-15.js"></script>
+  <script src="viewer-data/reports-16.js"></script>
+  <script src="viewer-data/reports-17.js"></script>
+  <script src="viewer-data/reports-18.js"></script>
+  <script src="viewer-data/reports-19.js"></script>
+  <script src="viewer-data/reports-20.js"></script>
+  <script src="viewer-data/reference-reports.js"></script>
+  <script>
+    (() => {
+      "use strict";
+
+      const reportCollections = {
+        literature: window.VALA_REPORTS || [],
+        reference: window.VALA_REFERENCE_REPORTS || []
+      };
+      const collectionLabels = {
+        literature: "Literature",
+        reference: "Reference material"
+      };
+      const statusOrder = ["approved", "rejected", "uncertain", "future-work"];
+      const statusLabels = {
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "uncertain": "Uncertain",
+        "future-work": "Future work"
+      };
+      const storageKey = "vala-literature-report-statuses-v1";
+      const phaseStorageKey = "vala-literature-report-phases-v1";
+      const priorityStorageKey = "vala-literature-report-priorities-v1";
+      const sortStorageKey = "vala-literature-report-sort-v1";
+      const collectionStorageKey = "vala-literature-report-collection-v1";
+      const phaseOrder = ["1", "2", "3"];
+      const priorityOrder = ["low", "medium", "high"];
+      const priorityLabels = { low: "Low", medium: "Medium", high: "High" };
+      const priorityKeys = { l: "low", m: "medium", h: "high" };
+      const sortOrders = ["index", "date-desc", "date-asc"];
+      const publicationYears = {
+        "computing-a-longest-increasing-subsequence-of-length-k-in-time-o-n-log-log-k-2008": 2008,
+        "on-computing-the-length-of-longest-increasing-subsequences-1975": 1975,
+        "a-comparative-study-of-different-longest-common-subsequence-algorithms-2016": 2016,
+        "a-differentiable-alignment-framework-for-sequence-to-sequence-modeling-via-optimal-transport-2025": 2025,
+        "a-survey-on-longest-common-subsequence-2018": 2018,
+        "a-coarse-grained-multicomputer-parallel-algorithm-for-the-sequential-substring-constrained-longest-c": 2022,
+        "a-faster-algorithm-computing-string-edit-distances-1980": 1980,
+        "a-flexible-multiple-sequence-alignment-program-1988": 1988,
+        "an-algorithm-for-the-longest-common-subsequence-and-substring-problem-for-multiple-strings-2024": 2024,
+        "automated-assembly-of-protein-blocks-for-database-searching-1991": 1991,
+        "bali-phy-version-3-model-based-co-estimation-of-alignment-and-phylogeny-2021": 2021,
+        "bioinformatics-methods-and-protocols-not-recorded": null,
+        "clustal-w-improving-the-sensitivity-of-progressive-multiple-sequence-alignment-through-sequence-weig": 1994,
+        "coffee-an-objective-function-for-multiple-sequence-alignments-1998": 1998,
+        "characterization-of-pairwise-and-multiple-sequence-alignment-errors-2009": 2009,
+        "efficient-cgm-based-parallel-algorithms-for-the-longest-common-subsequence-problem-with-multiple-sub": 2020,
+        "efficient-merged-longest-common-subsequence-algorithms-for-similar-sequences-2018": 2018,
+        "fast-and-flexible-string-matching-by-combining-bit-parallelism-and-suffix-automata-not-recorded": null,
+        "fast-and-sensitive-multiple-sequence-alignments-on-a-microcomputer-1989": 1989,
+        "fast-multiple-alignment-of-ungapped-dna-sequences-using-information-theory-and-a-relaxation-method-1": 1996,
+        "fast-optimal-alignment-1984": 1984,
+        "fast-text-searching-allowing-errors-1992": 1992,
+        "finding-the-longest-common-subsequence-for-multiple-biological-sequences-by-ant-colony-optimization": 2009,
+        "gap-costs-for-multiple-sequence-alignment-1989": 1989,
+        "gapped-blast-and-psi-blast-a-new-generation-of-protein-database-search-programs-1997": 1997,
+        "improvement-in-accuracy-of-multiple-sequence-alignment-using-novel-group-to-group-sequence-alignment": 2006,
+        "a-new-algorithm-for-the-longest-common-subsequence-problem-2007": 2007,
+        "a-new-bucket-based-algorithm-for-finding-lcs-from-two-given-molecular-sequences-2006": 2006,
+        "a-relative-position-based-algorithm-to-find-out-the-longest-common-subsequence-from-multiple-biologi": 2010,
+        "a-time-efficient-algorithm-for-finding-longest-common-subsequence-from-two-molecular-sequences-2007": 2007,
+        "a-new-approach-to-regular-indeterminate-strings-2021": 2021,
+        "algorithms-for-two-versions-of-lcs-problem-for-indeterminate-strings-not-recorded": null,
+        "an-analysis-on-computation-of-longest-common-subsequence-algorithm-2017": 2017,
+        "an-improved-longest-common-subsequence-algorithm-for-reducing-memory-complexity-in-global-alignment": 2008,
+        "an-o-nd-difference-algorithm-and-its-variations-1986": 1986,
+        "an-almost-linear-time-and-linear-space-algorithm-for-the-longest-common-subsequence-problem-2005": 2005,
+        "analysis-of-evolutionary-algorithms-for-the-longest-common-subsequence-problem-2010": 2010,
+        "approximating-the-longest-common-subsequence-problem-within-a-sub-polynomial-factor-in-linear-time-2": 2021,
+        "computing-a-longest-common-subsequence-for-multiple-sequences-2015": 2015,
+        "computing-the-longest-topological-common-subsequence-of-a-symbol-wise-totally-ordered-directed-acycl": 2009,
+        "efficient-cgm-based-parallel-algorithms-for-the-longest-common-subsequence-problem-with-multiple-sub-2": 2020,
+        "efficient-algorithms-for-the-longest-common-subsequence-problem-with-sequential-substring-constraint": 2013,
+        "efficient-algorithms-for-the-longest-common-subsequence-in-k-length-substrings-2014": 2014,
+        "improving-the-worst-case-performance-of-the-hunt-szymanski-strategy-for-the-longest-common-subsequen": 1985,
+        "linear-space-s-table-algorithms-for-the-longest-common-subsequence-problem-2023": 2023,
+        "maximal-common-subsequence-algorithms-2019": 2019,
+        "sketching-streaming-and-fine-grained-complexity-of-weighted-lcs-2018": 2018,
+        "longest-common-subsequence-between-run-length-encoded-strings-a-new-algorithm-with-improved-parallel": 2004,
+        "mafft-version-5-improvement-in-accuracy-of-multiple-sequence-alignment-2005": 2005,
+        "mafft-a-novel-method-for-rapid-multiple-sequence-alignment-based-on-fast-fourier-transform-2002": 2002,
+        "a-faster-algorithm-computing-string-edit-distances-1978": 1978,
+        "msaprobs-multiple-sequence-alignment-based-on-pair-hidden-markov-models-and-partition-function-poste": 2010,
+        "muscle-a-multiple-sequence-alignment-method-with-reduced-time-and-space-complexity-2004": 2004,
+        "measuring-the-distance-between-multiple-sequence-alignments-2012": 2012,
+        "minimap2-pairwise-alignment-for-nucleotide-sequences-2018": 2018,
+        "multiple-sequence-alignment-methods-and-protocols-2021": 2021,
+        "multiple-sequence-alignment-with-the-clustal-series-of-programs-2003": 2003,
+        "on-multiple-insertion-deletion-correcting-codes-2002": 2002,
+        "optimal-alignment-between-groups-of-sequences-and-its-application-to-multiple-sequence-alignment-199": 1993,
+        "optimizing-multiple-sequence-alignments-using-a-genetic-algorithm-based-on-three-objectives-structur": 2013,
+        "parallel-algorithm-for-longest-common-subsequence-in-a-string-2012": 2012,
+        "probcons-probabilistic-consistency-based-multiple-sequence-alignment-2005": 2005,
+        "shortcuts-diversions-and-maximal-chains-in-partially-ordered-sets-1973": 1973,
+        "identification-of-common-molecular-subsequences-1981": 1981,
+        "solving-longest-common-subsequence-problems-via-a-transformation-to-the-maximum-clique-problem-2021": 2021,
+        "string-editing-under-pattern-constraints-2024": 2024,
+        "t-coffee-a-novel-method-for-fast-and-accurate-multiple-sequence-alignment-2000": 2000,
+        "the-clustal-x-windows-interface-flexible-strategies-for-multiple-sequence-alignment-aided-by-quality": 1997,
+        "the-proteomics-protocols-handbook-2005": 2005,
+        "viral-phylogenomics-using-an-alignment-free-method-a-three-step-approach-to-determine-optimal-length": 2017,
+        "fast-gap-affine-pairwise-alignment-using-the-wavefront-algorithm-2021": 2021,
+        "a-fast-bit-vector-algorithm-for-approximate-string-matching-based-on-dynamic-programming-1999": 1999,
+        "accelerating-cryptanalysis-with-the-method-of-four-russians-2006": 2006,
+        "faster-algorithms-for-rna-folding-using-the-four-russians-method-2014": 2014,
+        "on-the-economical-construction-of-the-transitive-closure-of-a-directed-graph-1970": 1970,
+        "on-the-economical-construction-of-the-transitive-closure-of-a-directed-graph-1970-2": 1970,
+        "efficient-seeding-for-error-prone-sequences-with-subseqhash2-2025": 2025,
+        "a-unifying-look-at-data-structures-1980": 1980,
+        "the-physical-origin-of-intrinsic-bends-in-double-helical-dna-2000": 2000,
+        "prediction-of-physical-chemical-properties-of-amino-acids-from-genetic-code-2002": 2002,
+        "the-synergy-between-protein-positioning-and-dna-elasticity-energy-minimization-of-protein-decorated": 2014,
+        "chirality-in-a-quaternionic-representation-of-the-genetic-code-not-recorded": null,
+        "quantum-groups-and-the-genetic-code-2001": 2001,
+        "the-z-curve-database-a-graphic-representation-of-genome-sequences-2003": 2003,
+        "nomenclature-for-incompletely-specified-bases-in-nucleic-acid-sequences-recommendations-1984-1985": 1985,
+        "clifford-group-equivariant-neural-network-layers-for-protein-structure-prediction-2024": 2024,
+        "geometric-algebra-generation-of-molecular-surfaces-2022": 2022,
+        "amino-acid-substitution-matrices-from-protein-blocks-1992": 1992,
+        "a-fast-algorithm-for-computing-longest-common-subsequences-1977": 1977,
+        "a-fast-algorithm-for-computing-longest-common-subsequences-1977-2": 1977,
+        "algorithms-for-the-longest-common-subsequence-problem-1977": 1977,
+        "speeding-up-hirschberg-and-hunt-szymanski-lcs-algorithms-2003": 2003,
+        "accurate-multiple-alignment-of-distantly-related-genome-sequences-using-filtered-spaced-word-matches": 2019,
+        "levenshtein-distance-sequence-comparison-and-biological-database-search-2021": 2021,
+        "improved-tools-for-biological-sequence-comparison-1988": 1988,
+        "approximate-multiple-pattern-string-matching-using-bit-parallelism-a-review-2013": 2013,
+        "a-linear-space-algorithm-for-computing-maximal-common-subsequences-1975": 1975,
+        "heaviest-increasing-common-subsequence-problems-not-recorded": null,
+        "the-many-faces-of-sequence-alignment-2005": 2005,
+        "the-string-to-string-correction-problem-1974": 1974,
+        "a-fast-and-practical-bit-vector-algorithm-for-the-longest-common-subsequence-problem-2001": 2001,
+        "binary-codes-capable-of-correcting-deletions-insertions-and-reversals-1966": 1966,
+        "sequential-and-parallel-algorithms-for-the-all-substrings-longest-common-subsequence-problem-not-rec": null,
+        "codes-with-run-length-and-gc-content-constraints-for-dna-based-data-storage-2018": 2018,
+        "on-computing-average-common-substring-over-run-length-encoded-sequences-2018": 2018,
+        "run-length-encoding-graphic-rules-applied-to-dna-coded-images-and-animation-editable-by-polymerase-c": 2015,
+        "iterative-coding-scheme-satisfying-gc-balance-and-run-length-constraints-for-dna-storage-with-robust": 2022,
+        "steganographic-access-control-in-data-hiding-using-run-length-encoding-and-modulo-operations-2016": 2016,
+        "m2align-parallel-multiple-sequence-alignment-with-a-multi-objective-metaheuristic-2017": 2017,
+        "cremsa-compressed-indexing-of-ultra-large-multiple-sequence-alignments-2025": 2025,
+        "run-length-encoding-graphic-rules-biochemically-editable-designs-and-steganographical-numeric-data-e": 2013,
+        "a-coarse-grained-parallel-algorithm-for-the-all-substrings-longest-common-subsequence-problem-2006": 2006,
+        "new-processor-array-architectures-for-the-longest-common-subsequence-problem-2005": 2005,
+        "signal-processing-a-mathematical-approach-second-edition-2015": 2015,
+        "linear-systems-and-signals-second-edition-2005": 2005,
+        "discrete-convolution-and-fft-modified-with-double-influence-coefficient-superpositions-dcss-fft-for": 2021,
+        "fast-discrete-convolution-in-r2-with-radial-kernels-using-non-uniform-fast-fourier-transform-with-no": 2020,
+        "mugsy-fast-multiple-alignment-of-closely-related-whole-genomes-2011": 2011,
+        "recognition-and-complexity-of-point-visibility-graphs-2019": 2019,
+        "sparse-dynamic-programming-i-linear-cost-functions-1992": 1992,
+        "sparse-dynamic-programming-ii-convex-and-concave-cost-functions-not-recorded": null,
+        "sparse-dynamic-programming-for-longest-common-subsequence-from-fragments-2002": 2002,
+        "sparse-dynamic-programming-on-dags-with-small-width-2019": 2019,
+        "a-special-case-of-the-maximal-common-subsequence-problem-1975": 1975,
+        "algorithms-for-computing-the-longest-parameterized-common-subsequence-2007": 2007,
+        "parasail-simd-c-library-for-global-semi-global-and-local-pairwise-sequence-alignments-2016": 2016,
+        "a-pa2-up-to-19x-faster-exact-global-alignment-2024": 2024,
+        "ultrafast-and-memory-efficient-alignment-of-short-dna-sequences-to-the-human-genome-2009": 2009,
+        "fast-and-accurate-short-read-alignment-with-burrows-wheeler-transform-2009": 2009,
+        "optimal-gap-affine-alignment-in-o-s-space-2023": 2023,
+        "graphaligner-rapid-and-versatile-sequence-to-graph-alignment-2020": 2020,
+        "finding-approximate-patterns-in-strings-1985": 1985,
+        "code-astar-pairwise": null,
+        "code-astarix": null,
+        "code-gwfa": null,
+        "code-pasgal": null,
+        "code-graphaligner": null,
+        "code-pathfinding": null
+      };
+      const sourcePathOverrides = {
+        "a-coarse-grained-multicomputer-parallel-algorithm-for-the-sequential-substring-constrained-longest-c": "../../../../../literature/academic-papers/A coarse-grained multicomputer parallel algorithm for the sequential\nsubstring constrained longest common subsequence problem.pdf",
+        "automated-assembly-of-protein-blocks-for-database-searching-1991": "../../../../../literature/academic-papers/Automated assembly of protein blocks for database\nsearching.pdf",
+        "bali-phy-version-3-model-based-co-estimation-of-alignment-and-phylogeny-2021": "../../../../../literature/academic-papers/BAli-Phy version 3: model-based co-estimation of\nalignment and phylogeny.pdf",
+        "clustal-w-improving-the-sensitivity-of-progressive-multiple-sequence-alignment-through-sequence-weig": "../../../../../literature/academic-papers/CLUSTAL W: improving the sensitivity of progressive\nmultiple sequence alignment through sequence weighting,\nposition-specific gap penalties and weight matrix choice.pdf",
+        "coffee-an-objective-function-for-multiple-sequence-alignments-1998": "../../../../../literature/academic-papers/COFFEE: an objective function for multiple\nsequence alignments.pdf",
+        "fast-and-sensitive-multiple-sequence-alignments-on-a-microcomputer-1989": "../../../../../literature/academic-papers/Fast and sensitive multiple sequence\nalignments on a microcomputer.pdf",
+        "fast-multiple-alignment-of-ungapped-dna-sequences-using-information-theory-and-a-relaxation-method-1": "../../../../../literature/academic-papers/Fast multiple alignment of ungapped DNA sequences using\ninformation theory and a relaxation method.pdf",
+        "improvement-in-accuracy-of-multiple-sequence-alignment-using-novel-group-to-group-sequence-alignment": "../../../../../literature/academic-papers/Improvement in accuracy of multiple sequence alignment using\nnovel group-to-group sequence alignment algorithm with piecewise\nlinear gap cost.pdf",
+        "a-new-bucket-based-algorithm-for-finding-lcs-from-two-given-molecular-sequences-2006": "../../../../../literature/academic-papers/LCS/A New Bucket-Based Algorithm for Finding LCS from two given Molecular\nSequences.pdf",
+        "a-relative-position-based-algorithm-to-find-out-the-longest-common-subsequence-from-multiple-biologi": "../../../../../literature/academic-papers/LCS/A Relative Position based Algorithm to find out the Longest Common Subsequence\nfrom Multiple Biological Sequences.pdf",
+        "a-time-efficient-algorithm-for-finding-longest-common-subsequence-from-two-molecular-sequences-2007": "../../../../../literature/academic-papers/LCS/A Time Efficient Algorithm for Finding Longest Common Subsequence\nfrom two Molecular Sequences.pdf",
+        "algorithms-for-two-versions-of-lcs-problem-for-indeterminate-strings-not-recorded": "../../../../../literature/academic-papers/LCS/Algorithms for Two Versions of LCS Problem\nfor Indeterminate Strings.pdf",
+        "an-analysis-on-computation-of-longest-common-subsequence-algorithm-2017": "../../../../../literature/academic-papers/LCS/An Analysis on Computation of Longest Common\nSubsequence Algorithm.pdf",
+        "an-improved-longest-common-subsequence-algorithm-for-reducing-memory-complexity-in-global-alignment": "../../../../../literature/academic-papers/LCS/An Improved Longest Common Subsequence Algorithm for Reducing\nMemory Complexity in Global Alignment of DNA Sequences.pdf",
+        "an-almost-linear-time-and-linear-space-algorithm-for-the-longest-common-subsequence-problem-2005": "../../../../../literature/academic-papers/LCS/An almost-linear time and linear space algorithm\nfor the longest common subsequence problem.pdf",
+        "approximating-the-longest-common-subsequence-problem-within-a-sub-polynomial-factor-in-linear-time-2": "../../../../../literature/academic-papers/LCS/Approximating the Longest Common Subsequence problem within a\nsub-polynomial factor in linear time.pdf",
+        "computing-a-longest-common-subsequence-for-multiple-sequences-2015": "../../../../../literature/academic-papers/LCS/Computing a Longest Common Subsequence for\nMultiple Sequences.pdf",
+        "computing-the-longest-topological-common-subsequence-of-a-symbol-wise-totally-ordered-directed-acycl": "../../../../../literature/academic-papers/LCS/Computing the longest topological common subsequence of a\nsymbol-wise totally ordered directed acyclic graph and a sequence.pdf",
+        "efficient-algorithms-for-the-longest-common-subsequence-in-k-length-substrings-2014": "../../../../../literature/academic-papers/LCS/Eﬃcient algorithms for the longest common subsequence\nin k-length substrings.pdf",
+        "sketching-streaming-and-fine-grained-complexity-of-weighted-lcs-2018": "../../../../../literature/academic-papers/LCS/Sketching, Streaming, and Fine-Grained\nComplexity of (Weighted) LCS.pdf",
+        "mafft-version-5-improvement-in-accuracy-of-multiple-sequence-alignment-2005": "../../../../../literature/academic-papers/MAFFT version 5: improvement in accuracy of\nmultiple sequence alignment.pdf",
+        "mafft-a-novel-method-for-rapid-multiple-sequence-alignment-based-on-fast-fourier-transform-2002": "../../../../../literature/academic-papers/MAFFT: a novel method for rapid multiple sequence\nalignment based on fast Fourier transform.pdf",
+        "msaprobs-multiple-sequence-alignment-based-on-pair-hidden-markov-models-and-partition-function-poste": "../../../../../literature/academic-papers/MSAProbs: multiple sequence alignment based on pair hidden\nMarkov models and partition function posterior probabilities.pdf",
+        "muscle-a-multiple-sequence-alignment-method-with-reduced-time-and-space-complexity-2004": "../../../../../literature/academic-papers/MUSCLE: a multiple sequence alignment method with reduced\ntime and space complexity.pdf",
+        "multiple-sequence-alignment-methods-and-protocols-2021": "../../../../../literature/academic-papers/Multiple\nSequence\nAlignment.pdf",
+        "multiple-sequence-alignment-with-the-clustal-series-of-programs-2003": "../../../../../literature/academic-papers/Multiple sequence alignment with the Clustal\nseries of programs.pdf",
+        "optimal-alignment-between-groups-of-sequences-and-its-application-to-multiple-sequence-alignment-199": "../../../../../literature/academic-papers/Optimal alignment between groups of\nsequences and its application to multiple\nsequence alignment.pdf",
+        "probcons-probabilistic-consistency-based-multiple-sequence-alignment-2005": "../../../../../literature/academic-papers/ProbCons: Probabilistic consistency-based multiple\nsequence alignment.pdf",
+        "t-coffee-a-novel-method-for-fast-and-accurate-multiple-sequence-alignment-2000": "../../../../../literature/academic-papers/T-Coffee: A Novel Method for Fast and Accurate\nMultiple Sequence Alignment.pdf",
+        "the-clustal-x-windows-interface-flexible-strategies-for-multiple-sequence-alignment-aided-by-quality": "../../../../../literature/academic-papers/The CLUSTAL_X windows interface: flexible strategies\nfor multiple sequence alignment aided by quality\nanalysis tools.pdf",
+        "a-fast-bit-vector-algorithm-for-approximate-string-matching-based-on-dynamic-programming-1999": "../../../../../literature/academic-papers/buffer/A Fast Bit-Vector Algorithm for Approximate String\nMatching Based on Dynamic Programming.pdf",
+        "speeding-up-hirschberg-and-hunt-szymanski-lcs-algorithms-2003": "../../../../../literature/academic-papers/implementation-in-progress/Speeding-up Hirschberg and Hunt-Szymanski\nLCS Algorithms.pdf",
+        "accurate-multiple-alignment-of-distantly-related-genome-sequences-using-filtered-spaced-word-matches": "../../../../../literature/academic-papers/irrelevant-but-good-for-reference-material/Accurate multiple alignment of distantly related\ngenome sequences using filtered spaced word\nmatches as anchor points - Leimester.pdf"
+      };
+      const picker = document.getElementById("report-picker");
+      const sortPicker = document.getElementById("sort-order");
+      const reportElement = document.getElementById("report");
+      const counter = document.getElementById("counter");
+      const meta = document.getElementById("report-meta");
+      const resourceLink = document.getElementById("resource-link");
+      const statusSummary = document.getElementById("status-summary");
+      const phaseSummary = document.getElementById("phase-summary");
+      const prioritySummary = document.getElementById("priority-summary");
+      const statusButton = document.getElementById("status");
+      const phaseButtons = Array.from(document.querySelectorAll(".phase-button"));
+      const priorityButtons = Array.from(document.querySelectorAll(".priority-button"));
+      const collectionTabs = Array.from(document.querySelectorAll(".collection-tab"));
+      let activeCollection = loadCollection();
+      let reports = reportCollections[activeCollection] || reportCollections.literature;
+      let originalPositions = new Map(reports.map((report, index) => [report.id, index]));
+      let currentIndex = 0;
+      let statuses = loadStatuses();
+      let phases = loadPhases();
+      let priorities = loadPriorities();
+      let sortOrder = loadSortOrder();
+      let orderedReports = sortReports(sortOrder);
+
+      function loadStatuses() {
+        try {
+          const value = JSON.parse(localStorage.getItem(storageKey) || "{}");
+          return value && typeof value === "object" ? value : {};
+        } catch (_) {
+          return {};
+        }
+      }
+
+      function saveStatuses() {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(statuses));
+        } catch (_) {
+          // The viewer remains usable when browser storage is unavailable.
+        }
+      }
+
+      function loadPhases() {
+        try {
+          const value = JSON.parse(localStorage.getItem(phaseStorageKey) || "{}");
+          return value && typeof value === "object" ? value : {};
+        } catch (_) {
+          return {};
+        }
+      }
+
+      function savePhases() {
+        try {
+          localStorage.setItem(phaseStorageKey, JSON.stringify(phases));
+        } catch (_) {
+          // The viewer remains usable when browser storage is unavailable.
+        }
+      }
+
+      function loadPriorities() {
+        try {
+          const value = JSON.parse(localStorage.getItem(priorityStorageKey) || "{}");
+          return value && typeof value === "object" ? value : {};
+        } catch (_) {
+          return {};
+        }
+      }
+
+      function savePriorities() {
+        try {
+          localStorage.setItem(priorityStorageKey, JSON.stringify(priorities));
+        } catch (_) {
+          // The viewer remains usable when browser storage is unavailable.
+        }
+      }
+
+      function loadSortOrder() {
+        try {
+          const value = localStorage.getItem(sortStorageKey) || "index";
+          return sortOrders.includes(value) ? value : "index";
+        } catch (_) {
+          return "index";
+        }
+      }
+
+      function saveSortOrder() {
+        try {
+          localStorage.setItem(sortStorageKey, sortOrder);
+        } catch (_) {
+          // The viewer remains usable when browser storage is unavailable.
+        }
+      }
+
+      function loadCollection() {
+        try {
+          const value = localStorage.getItem(collectionStorageKey) || "literature";
+          return Object.hasOwn(reportCollections, value) ? value : "literature";
+        } catch (_) {
+          return "literature";
+        }
+      }
+
+      function saveCollection() {
+        try {
+          localStorage.setItem(collectionStorageKey, activeCollection);
+        } catch (_) {
+          // The viewer remains usable when browser storage is unavailable.
+        }
+      }
+
+      function statusFor(report) {
+        const saved = statuses[report.id];
+        return statusOrder.includes(saved) ? saved : report.initialStatus || "approved";
+      }
+
+      function defaultPhaseFor(report) {
+        if (report.html.includes("<strong>Direct.</strong>")) return "1";
+        if (report.html.includes("<strong>Adjacent.</strong>")) return "2";
+        return "3";
+      }
+
+      function phaseFor(report) {
+        const saved = phases[report.id];
+        return phaseOrder.includes(saved) ? saved : defaultPhaseFor(report);
+      }
+
+      function priorityFor(report) {
+        const saved = priorities[report.id];
+        if (priorityOrder.includes(saved)) return saved;
+        return { "1": "high", "2": "medium", "3": "low" }[phaseFor(report)];
+      }
+
+      function sourcePathFor(report) {
+        return sourcePathOverrides[report.id] || report.source.replace(/^`|`$/g, "");
+      }
+
+      function localSourceHref(sourcePath) {
+        const encodedPath = sourcePath.split("/").map(encodeURIComponent).join("/");
+        return new URL(`../../../${encodedPath}`, window.location.href).href;
+      }
+
+      function sourceHrefFor(report) {
+        return report.primaryUrl || localSourceHref(sourcePathFor(report));
+      }
+
+      function publicationYearFor(report) {
+        if (Number.isInteger(report.year)) return report.year;
+        const year = publicationYears[report.id];
+        return Number.isInteger(year) ? year : null;
+      }
+
+      function sortReports(order) {
+        const sorted = reports.slice();
+        if (order === "index") return sorted;
+
+        const direction = order === "date-asc" ? 1 : -1;
+        return sorted.sort((left, right) => {
+          const leftYear = publicationYearFor(left);
+          const rightYear = publicationYearFor(right);
+          if (leftYear === null && rightYear === null) {
+            return originalPositions.get(left.id) - originalPositions.get(right.id);
+          }
+          if (leftYear === null) return 1;
+          if (rightYear === null) return -1;
+          return direction * (leftYear - rightYear) ||
+            originalPositions.get(left.id) - originalPositions.get(right.id);
+        });
+      }
+
+      function populatePicker() {
+        picker.replaceChildren();
+        orderedReports.forEach((report, index) => {
+          const option = document.createElement("option");
+          option.value = String(index);
+          const year = publicationYearFor(report);
+          const dateLabel = year === null ? "date not recorded" : year;
+          option.textContent = `${index + 1}. ${report.title} (${dateLabel})`;
+          picker.appendChild(option);
+        });
+      }
+
+      function indexFromHash() {
+        const id = decodeURIComponent(location.hash.slice(1));
+        const index = orderedReports.findIndex(report => report.id === id);
+        return index < 0 ? 0 : index;
+      }
+
+      function collectionFromHash() {
+        const id = decodeURIComponent(location.hash.slice(1));
+        if (!id) return null;
+        return Object.keys(reportCollections).find(collection =>
+          reportCollections[collection].some(report => report.id === id)
+        ) || null;
+      }
+
+      function activateCollection(collection, options = {}) {
+        if (!Object.hasOwn(reportCollections, collection)) return;
+        activeCollection = collection;
+        reports = reportCollections[activeCollection];
+        originalPositions = new Map(reports.map((report, index) => [report.id, index]));
+        orderedReports = sortReports(sortOrder);
+        populatePicker();
+        currentIndex = options.useHash ? indexFromHash() : 0;
+        collectionTabs.forEach(tab => {
+          const active = tab.dataset.collection === activeCollection;
+          tab.classList.toggle("is-active", active);
+          tab.setAttribute("aria-selected", String(active));
+        });
+        saveCollection();
+        render({ scroll: options.scroll !== false });
+      }
+
+      function applySort(order) {
+        if (!sortOrders.includes(order)) return;
+        sortOrder = order;
+        orderedReports = sortReports(sortOrder);
+        populatePicker();
+        sortPicker.value = sortOrder;
+        currentIndex = 0;
+        saveSortOrder();
+        render();
+      }
+
+      function updateStatusSummary() {
+        const counts = Object.fromEntries(statusOrder.map(status => [status, 0]));
+        const phaseCounts = Object.fromEntries(phaseOrder.map(phase => [phase, 0]));
+        const priorityCounts = Object.fromEntries(priorityOrder.map(priority => [priority, 0]));
+        reports.forEach(report => counts[statusFor(report)] += 1);
+        reports.forEach(report => phaseCounts[phaseFor(report)] += 1);
+        reports.forEach(report => priorityCounts[priorityFor(report)] += 1);
+        statusSummary.innerHTML = statusOrder.map(status =>
+          `<span>${statusLabels[status]}: <strong>${counts[status]}</strong></span>`
+        ).join(" · ");
+        phaseSummary.innerHTML = phaseOrder.map(phase =>
+          `<span>Phase ${phase}: <strong>${phaseCounts[phase]}</strong></span>`
+        ).join(" · ");
+        prioritySummary.innerHTML = ["high", "medium", "low"].map(priority =>
+          `<span>${priorityLabels[priority]}: <strong>${priorityCounts[priority]}</strong></span>`
+        ).join(" · ");
+      }
+
+      function render(options = {}) {
+        if (!reports.length) {
+          reportElement.innerHTML = '<div class="empty-state">No reports were loaded.</div>';
+          return;
+        }
+
+        const report = orderedReports[currentIndex];
+        const status = statusFor(report);
+        const phase = phaseFor(report);
+        const priority = priorityFor(report);
+        const sourcePath = sourcePathFor(report);
+        const publicationYear = publicationYearFor(report);
+        reportElement.innerHTML = report.html;
+        reportElement.dataset.status = status;
+        reportElement.dataset.phase = phase;
+        reportElement.dataset.priority = priority;
+        picker.value = String(currentIndex);
+        counter.textContent = `${collectionLabels[activeCollection]} ${currentIndex + 1} of ${reports.length}`;
+        meta.textContent = `Phase ${phase} · ${priorityLabels[priority]} priority · ${publicationYear ?? "Date not recorded"} · ${report.kind} · ${report.reportFile}`;
+        resourceLink.href = sourceHrefFor(report);
+        resourceLink.textContent = report.primaryUrl ? "Open primary record ↗" :
+          report.kind === "Paper" ? "Open PDF ↗" : "Open code directory ↗";
+        resourceLink.title = report.primaryUrl ? `Open ${report.primaryUrl}` : `Open ${sourcePath}`;
+        statusButton.dataset.status = status;
+        statusButton.textContent = statusLabels[status];
+        statusButton.setAttribute("aria-label", `Status: ${statusLabels[status]}. Activate to change status.`);
+        phaseButtons.forEach(button => {
+          const active = button.dataset.phase === phase;
+          button.classList.toggle("is-active", active);
+          button.setAttribute("aria-pressed", String(active));
+        });
+        priorityButtons.forEach(button => {
+          const active = button.dataset.priority === priority;
+          button.classList.toggle("is-active", active);
+          button.setAttribute("aria-pressed", String(active));
+        });
+        document.title = `${report.title} — VALA ${collectionLabels[activeCollection].toLowerCase()} reports`;
+        history.replaceState(null, "", `#${encodeURIComponent(report.id)}`);
+        updateStatusSummary();
+
+        if (options.scroll !== false) {
+          window.scrollTo({ top: 0, behavior: options.instant ? "auto" : "smooth" });
+        }
+      }
+
+      function navigate(offset) {
+        currentIndex = (currentIndex + offset + orderedReports.length) % orderedReports.length;
+        render();
+      }
+
+      function setCurrent(index) {
+        if (!Number.isInteger(index) || index < 0 || index >= orderedReports.length) return;
+        currentIndex = index;
+        render();
+      }
+
+      function cycleStatus() {
+        if (!reports.length) return;
+        const report = orderedReports[currentIndex];
+        const current = statusFor(report);
+        const next = statusOrder[(statusOrder.indexOf(current) + 1) % statusOrder.length];
+        statuses[report.id] = next;
+        saveStatuses();
+        render({ scroll: false });
+      }
+
+      function assignPhase(phase) {
+        if (!reports.length || !phaseOrder.includes(phase)) return;
+        phases[orderedReports[currentIndex].id] = phase;
+        savePhases();
+        render({ scroll: false });
+      }
+
+      function assignPriority(priority) {
+        if (!reports.length || !priorityOrder.includes(priority)) return;
+        priorities[orderedReports[currentIndex].id] = priority;
+        savePriorities();
+        render({ scroll: false });
+      }
+
+      function isEditable(target) {
+        return target instanceof HTMLElement && (
+          target.isContentEditable ||
+          target.matches("input, textarea, select, option")
+        );
+      }
+
+      document.getElementById("previous").addEventListener("click", () => navigate(-1));
+      document.getElementById("next").addEventListener("click", () => navigate(1));
+      statusButton.addEventListener("click", cycleStatus);
+      phaseButtons.forEach(button => {
+        button.addEventListener("click", () => assignPhase(button.dataset.phase));
+      });
+      priorityButtons.forEach(button => {
+        button.addEventListener("click", () => assignPriority(button.dataset.priority));
+      });
+      collectionTabs.forEach(tab => {
+        tab.addEventListener("click", () => activateCollection(tab.dataset.collection));
+      });
+      picker.addEventListener("change", event => setCurrent(Number(event.target.value)));
+      sortPicker.addEventListener("change", event => applySort(event.target.value));
+      window.addEventListener("hashchange", () => {
+        const hashCollection = collectionFromHash();
+        if (hashCollection && hashCollection !== activeCollection) {
+          activateCollection(hashCollection, { useHash: true });
+          return;
+        }
+        const index = indexFromHash();
+        if (index !== currentIndex) {
+          currentIndex = index;
+          render();
+        }
+      });
+      document.addEventListener("keydown", event => {
+        if (isEditable(event.target) || event.altKey || event.ctrlKey || event.metaKey) return;
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          navigate(-1);
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          navigate(1);
+        } else if (event.code === "Space") {
+          event.preventDefault();
+          cycleStatus();
+        } else if (phaseOrder.includes(event.key)) {
+          event.preventDefault();
+          assignPhase(event.key);
+        } else if (Object.hasOwn(priorityKeys, event.key.toLowerCase())) {
+          event.preventDefault();
+          assignPriority(priorityKeys[event.key.toLowerCase()]);
+        }
+      });
+
+      sortPicker.value = sortOrder;
+      const initialHashCollection = collectionFromHash();
+      activateCollection(initialHashCollection || activeCollection, {
+        useHash: Boolean(initialHashCollection),
+        scroll: false
+      });
+    })();
+  </script>
+</body>
+</html>

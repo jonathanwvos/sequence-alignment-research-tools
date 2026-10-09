@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reports"],
+  "properties": {
+    "reports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["asset_id", "summary", "objectives", "arguments", "analysis", "methods", "applications", "optimization", "evaluation", "results", "limitations"],
+        "properties": {
+          "asset_id": {"type": "string"},
+          "summary": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+          "objectives": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+          "arguments": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+          "analysis": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+          "methods": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+          "applications": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+          "optimization": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+          "evaluation": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+          "results": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+          "limitations": {"type": "array", "items": {"$ref": "#/$defs/claim"}}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "page"],
+      "properties": {
+        "text": {"type": "string"},
+        "page": {"type": ["integer", "null"]}
+      }
+    }
+  }
+}

@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>VALA paper capability classifications</title>
+  <style>
+    :root {
+      --ink: #17231d;
+      --muted: #66736c;
+      --paper: #fffdf8;
+      --canvas: #edf2ed;
+      --line: #d2dbd4;
+      --accent: #155f47;
+      --accent-2: #0e7755;
+      --accent-soft: #dceee5;
+      --warning: #8a5b08;
+      --warning-soft: #fbefcf;
+      --high: #176846;
+      --medium: #76621a;
+      --screening: #766b61;
+      --shadow: 0 20px 55px rgba(32, 53, 42, .10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% -10%, rgba(255,255,255,.96), transparent 35rem),
+        linear-gradient(135deg, #e5ede7, #f2f2e9);
+      font: 15px/1.58 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, input, select { font: inherit; }
+    button, select { cursor: pointer; }
+    a { color: var(--accent); }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(23, 35, 29, .14);
+      background: rgba(246, 249, 245, .94);
+      backdrop-filter: blur(15px);
+    }
+    .header-inner { width: min(1500px, calc(100% - 28px)); margin: auto; padding: 13px 0 0; }
+    .masthead { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 11px; }
+    .brand { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+    .brand strong { color: var(--accent); font: 800 1.1rem/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; }
+    .brand span, .counter { color: var(--muted); font-size: .82rem; }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(240px, 1.8fr) minmax(170px, .7fr) auto auto;
+      gap: 8px;
+      margin-bottom: 11px;
+    }
+    .control, .nav-button {
+      min-height: 41px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      color: var(--ink);
+      background: white;
+    }
+    .control { width: 100%; padding: 0 12px; }
+    .nav-button { min-width: 45px; padding: 0 13px; font-weight: 750; }
+    .control:focus, .nav-button:focus, .paper-tab:focus { outline: 3px solid rgba(21, 95, 71, .22); outline-offset: 1px; }
+    .nav-button:hover, .control:hover { border-color: #93a39a; }
+
+    .tab-scroller { overflow-x: auto; scrollbar-width: thin; border-top: 1px solid rgba(23,35,29,.08); }
+    .paper-tabs { display: flex; gap: 5px; width: max-content; min-width: 100%; padding: 8px 0 10px; }
+    .paper-tab {
+      max-width: 270px;
+      min-height: 35px;
+      padding: 6px 11px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      background: rgba(255,255,255,.78);
+      font-size: .78rem;
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .paper-tab:hover { color: var(--ink); border-color: #93a39a; }
+    .paper-tab[aria-selected="true"] { color: var(--accent); border-color: #9cc4b2; background: var(--accent-soft); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 22px;
+      width: min(1260px, calc(100% - 30px));
+      margin: 30px auto 70px;
+      align-items: start;
+    }
+    .paper-panel {
+      min-width: 0;
+      padding: clamp(23px, 4vw, 48px);
+      border: 1px solid rgba(23,35,29,.12);
+      border-radius: 17px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .sidebar { position: sticky; top: 165px; display: grid; gap: 12px; }
+    .side-card { padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.80); }
+    .side-card h2 { margin: 0 0 9px; font-size: .83rem; letter-spacing: .08em; text-transform: uppercase; }
+    .side-card p { margin: 0; color: var(--muted); font-size: .82rem; }
+    .side-list { display: grid; gap: 6px; margin-top: 10px; }
+    .side-row { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; }
+    .side-row span:first-child { color: var(--muted); }
+    .side-row strong { text-align: right; }
+
+    .eyebrow { margin-bottom: 9px; color: var(--accent); font: 750 .78rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 0; font: 750 clamp(1.65rem, 4vw, 2.7rem)/1.12 Georgia, "Times New Roman", serif; letter-spacing: -.02em; }
+    .authors { margin: 10px 0 0; color: var(--muted); font-size: .95rem; }
+    .summary { margin: 20px 0; color: #34423a; font-size: 1.02rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 23px; }
+    .pdf-link, .quiet-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 39px;
+      padding: 0 13px;
+      border-radius: 8px;
+      font-weight: 750;
+      text-decoration: none;
+    }
+    .pdf-link { color: white; background: var(--accent); }
+    .pdf-link:hover { background: var(--accent-2); }
+    .quiet-link { border: 1px solid var(--line); background: white; }
+
+    .meta-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 0 0 24px; }
+    .meta-item { min-width: 0; padding: 10px 11px; border: 1px solid #e0e5df; border-radius: 8px; background: #fafbf7; }
+    .meta-item span { display: block; color: var(--muted); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; }
+    .meta-item strong { display: block; overflow: hidden; margin-top: 3px; font-size: .83rem; text-overflow: ellipsis; white-space: nowrap; }
+
+    .warning-box { margin: 0 0 23px; padding: 12px 14px; border: 1px solid #ead59e; border-radius: 9px; color: #6f4b08; background: var(--warning-soft); }
+    .warning-box ul { margin: 5px 0 0 18px; padding: 0; }
+    .empty { padding: 30px 0; color: var(--muted); text-align: center; }
+
+    .group-section { margin-top: 28px; scroll-margin-top: 170px; }
+    .group-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 15px; margin-bottom: 9px; padding-bottom: 7px; border-bottom: 1px solid var(--line); }
+    .group-heading h2 { margin: 0; color: var(--accent); font-size: 1.02rem; }
+    .group-heading span { color: var(--muted); font-size: .75rem; }
+    .claim-list { display: grid; gap: 9px; }
+    .claim { padding: 13px 14px; border: 1px solid #dee4de; border-radius: 10px; background: #fff; }
+    .claim-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .claim-key { font: 700 .84rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .confidence { flex: none; padding: 2px 7px; border-radius: 999px; font-size: .68rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+    .confidence.high { color: var(--high); background: #def2e7; }
+    .confidence.medium { color: var(--medium); background: #f3eccb; }
+    .confidence.screening { color: var(--screening); background: #ece9e5; }
+    .definition { margin: 3px 0 9px; color: var(--muted); font-size: .8rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tag { padding: 3px 7px; border: 1px solid #b8d4c7; border-radius: 6px; color: #14583f; background: #edf7f1; font: 700 .75rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    details { margin-top: 10px; }
+    summary { cursor: pointer; color: var(--muted); font-size: .78rem; font-weight: 700; }
+    blockquote { margin: 9px 0 0; padding: 9px 11px; border-left: 3px solid #a8c8b8; color: #45524b; background: #f7faf6; font-size: .8rem; }
+    .claim-note { margin: 7px 0 0; color: var(--muted); font-size: .76rem; }
+
+    .about-note { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    @media (max-width: 980px) {
+      .toolbar { grid-template-columns: 1fr 1fr auto auto; }
+      .toolbar .search { grid-column: 1 / -1; grid-row: 1; }
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; grid-row: 1; grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 660px) {
+      .masthead { display: block; }
+      .counter { display: block; margin-top: 6px; }
+      .toolbar { grid-template-columns: 1fr auto auto; }
+      .paper-select { grid-column: 1 / -1; }
+      .group-select { grid-column: 1 / -1; }
+      .layout { width: min(100% - 18px, 1260px); margin-top: 14px; }
+      .paper-panel { padding: 21px 17px; border-radius: 12px; }
+      .sidebar { grid-template-columns: 1fr; }
+      .meta-grid { grid-template-columns: 1fr 1fr; }
+      .claim-head { display: block; }
+      .confidence { display: inline-block; margin-top: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="masthead">
+        <div class="brand"><strong>VALA</strong><span>processed-paper capability classifications</span></div>
+        <div class="counter" id="counter"></div>
+      </div>
+      <div class="toolbar">
+        <input class="control search" id="search" type="search" placeholder="Filter papers, dimensions, or values…" aria-label="Filter papers">
+        <select class="control paper-select" id="paperSelect" aria-label="Select paper"></select>
+        <select class="control group-select" id="groupSelect" aria-label="Limit displayed classification group"><option value="">All index groups</option></select>
+        <button class="nav-button" id="previous" type="button" aria-label="Previous paper">←</button>
+        <button class="nav-button" id="next" type="button" aria-label="Next paper">→</button>
+      </div>
+      <div class="tab-scroller" id="tabScroller">
+        <div class="paper-tabs" id="paperTabs" role="tablist" aria-label="Papers"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main class="paper-panel" id="paperPanel" role="tabpanel" tabindex="0" aria-live="polite"></main>
+    <aside class="sidebar" id="sidebar"></aside>
+  </div>
+
+  <script>
+    const DATA = __PAPER_DATA__;
+    const GROUPS = __GROUP_DATA__;
+    const DIMENSIONS = __DIMENSION_DATA__;
+    const allPapers = DATA.papers;
+    const byId = new Map(allPapers.map(paper => [paper.id, paper]));
+    const groupDefinitions = new Map();
+    DIMENSIONS.forEach(dimension => {
+      if (!groupDefinitions.has(dimension.group)) groupDefinitions.set(dimension.group, []);
+      groupDefinitions.get(dimension.group).push(dimension);
+    });
+
+    const elements = {
+      search: document.querySelector('#search'),
+      select: document.querySelector('#paperSelect'),
+      group: document.querySelector('#groupSelect'),
+      tabs: document.querySelector('#paperTabs'),
+      tabScroller: document.querySelector('#tabScroller'),
+      panel: document.querySelector('#paperPanel'),
+      sidebar: document.querySelector('#sidebar'),
+      counter: document.querySelector('#counter'),
+      previous: document.querySelector('#previous'),
+      next: document.querySelector('#next'),
+    };
+
+    let filtered = [...allPapers];
+    let activeId = idFromHash() || allPapers[0]?.id;
+
+    function esc(value) {
+      return String(value ?? '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    }
+
+    function idFromHash() {
+      const match = location.hash.match(/paper=([a-f0-9]+)/);
+      return match && byId.has(match[1]) ? match[1] : null;
+    }
+
+    function paperSearchText(paper) {
+      return [paper.title, paper.authors, paper.filename, paper.summary,
+        ...paper.claims.flatMap(claim => [claim.group, claim.dimension, claim.definition, ...claim.values])
+      ].filter(Boolean).join(' ').toLowerCase();
+    }
+
+    function applyFilter() {
+      const terms = elements.search.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+      filtered = allPapers.filter(paper => {
+        const text = paperSearchText(paper);
+        return terms.every(term => text.includes(term));
+      });
+      if (!filtered.some(paper => paper.id === activeId)) activeId = filtered[0]?.id || null;
+      renderNavigation();
+      render();
+    }
+
+    function renderNavigation() {
+      elements.select.innerHTML = filtered.map(paper => `<option value="${paper.id}">${esc(paper.title)}</option>`).join('');
+      if (activeId) elements.select.value = activeId;
+      elements.tabs.innerHTML = filtered.map(paper => `
+        <button class="paper-tab" id="tab-${paper.id}" role="tab" aria-selected="${paper.id === activeId}" aria-controls="paperPanel" title="${esc(paper.title)}" data-id="${paper.id}">${esc(paper.title)}</button>
+      `).join('');
+      elements.tabs.querySelectorAll('.paper-tab').forEach(tab => tab.addEventListener('click', () => activate(tab.dataset.id)));
+      elements.counter.textContent = `${filtered.length} of ${allPapers.length} PDFs`;
+    }
+
+    function activate(id, updateHash = true) {
+      if (!byId.has(id)) return;
+      activeId = id;
+      if (!filtered.some(paper => paper.id === id)) {
+        elements.search.value = '';
+        filtered = [...allPapers];
+      }
+      if (updateHash) history.replaceState(null, '', `#paper=${id}`);
+      renderNavigation();
+      render();
+      requestAnimationFrame(() => document.querySelector(`#tab-${id}`)?.scrollIntoView({block: 'nearest', inline: 'center'}));
+    }
+
+    function move(delta) {
+      if (!filtered.length) return;
+      const current = Math.max(0, filtered.findIndex(paper => paper.id === activeId));
+      activate(filtered[(current + delta + filtered.length) % filtered.length].id);
+    }
+
+    function groupedClaims(paper) {
+      const selectedGroup = elements.group.value;
+      const grouped = new Map();
+      paper.claims.forEach(claim => {
+        if (selectedGroup && claim.group !== selectedGroup) return;
+        if (!grouped.has(claim.group)) grouped.set(claim.group, []);
+        grouped.get(claim.group).push(claim);
+      });
+      return grouped;
+    }
+
+    function claimHtml(claim) {
+      return `<div class="claim">
+        <div class="claim-head">
+          <div class="claim-key">${esc(claim.dimension)}</div>
+          <span class="confidence ${esc(claim.confidence)}">${esc(claim.confidence)} · ${esc(claim.basis)}</span>
+        </div>
+        <div class="definition">${esc(claim.definition)}</div>
+        <div class="tags">${claim.values.map(value => `<span class="tag">${esc(value)}</span>`).join('')}</div>
+        <details><summary>Evidence · ${esc(claim.source_area)}</summary><blockquote>${esc(claim.evidence)}</blockquote><p class="claim-note">${esc(claim.notes || '')}</p></details>
+      </div>`;
+    }
+
+    function render() {
+      const paper = byId.get(activeId);
+      if (!paper) {
+        elements.panel.innerHTML = '<div class="empty">No papers match the current filter.</div>';
+        elements.sidebar.innerHTML = '';
+        return;
+      }
+      elements.select.value = paper.id;
+      const grouped = groupedClaims(paper);
+      const reportHref = paper.matching_report ? '../' + paper.matching_report.replace(/^literature\//, '') : null;
+      const warnings = paper.warnings.length ? `<div class="warning-box"><strong>Screening notes</strong><ul>${paper.warnings.map(w => `<li>${esc(w)}</li>`).join('')}</ul></div>` : '';
+      const sections = GROUPS.filter(group => grouped.has(group)).map(group => `
+        <section class="group-section" id="group-${esc(group.replace(/\W+/g, '-'))}">
+          <div class="group-heading"><h2>${esc(group)}</h2><span>${grouped.get(group).length} relevant field${grouped.get(group).length === 1 ? '' : 's'}</span></div>
+          <div class="claim-list">${grouped.get(group).map(claimHtml).join('')}</div>
+        </section>
+      `).join('');
+      elements.panel.innerHTML = `
+        <div class="eyebrow">Paper ${allPapers.indexOf(paper) + 1} of ${allPapers.length}</div>
+        <h1>${esc(paper.title)}</h1>
+        ${paper.authors ? `<p class="authors">${esc(paper.authors)}</p>` : ''}
+        <p class="summary">${esc(paper.summary || 'No reliable abstract or matching report summary was extractable.')}</p>
+        <div class="actions">
+          <a class="pdf-link" href="${esc(paper.pdf_href)}" target="_blank" rel="noopener">Open local PDF ↗</a>
+          ${reportHref ? `<a class="quiet-link" href="${esc(reportHref)}" target="_blank" rel="noopener">Open earlier report ↗</a>` : ''}
+        </div>
+        <div class="meta-grid">
+          <div class="meta-item"><span>Pages</span><strong>${paper.pages ?? 'Unknown'}</strong></div>
+          <div class="meta-item"><span>Detected fields</span><strong>${paper.claims.length} / ${DIMENSIONS.length}</strong></div>
+          <div class="meta-item"><span>Text extracted</span><strong>${paper.text_characters.toLocaleString()} chars</strong></div>
+          <div class="meta-item" title="${esc(paper.sha256)}"><span>SHA-256</span><strong>${esc(paper.sha256.slice(0, 16))}…</strong></div>
+        </div>
+        ${warnings}
+        ${sections || '<div class="empty">No fields remain under the selected group filter.</div>'}
+        <p class="about-note">This page shows screening evidence, not an implementation contract. A missing index is unverified, not unsupported. Open the PDF and check the cited context before relying on a value. File: <code>${esc(paper.filename)}</code></p>
+      `;
+      renderSidebar(paper, grouped);
+      document.title = `${paper.title} · VALA classifications`;
+    }
+
+    function renderSidebar(paper, grouped) {
+      const values = paper.claims.reduce((sum, claim) => sum + claim.values.length, 0);
+      const confidence = paper.claims.reduce((counts, claim) => {
+        counts[claim.confidence] = (counts[claim.confidence] || 0) + 1;
+        return counts;
+      }, {});
+      const groups = [...grouped.keys()];
+      elements.sidebar.innerHTML = `
+        <div class="side-card">
+          <h2>Classification</h2>
+          <div class="side-list">
+            <div class="side-row"><span>Index groups</span><strong>${groups.length}</strong></div>
+            <div class="side-row"><span>Fields</span><strong>${paper.claims.length}</strong></div>
+            <div class="side-row"><span>Values</span><strong>${values}</strong></div>
+            <div class="side-row"><span>High confidence</span><strong>${confidence.high || 0}</strong></div>
+            <div class="side-row"><span>Warnings</span><strong>${paper.warnings.length}</strong></div>
+          </div>
+        </div>
+        <div class="side-card">
+          <h2>Visible groups</h2>
+          <div class="side-list">${groups.map(group => `<a href="#group-${esc(group.replace(/\W+/g, '-'))}">${esc(group.replace(/^\d+\s*/, ''))}</a>`).join('')}</div>
+        </div>
+        <div class="side-card">
+          <h2>Collection rule</h2>
+          <p>Only detected facets appear. Blank matrix cells and absent page fields mean unverified. Byte-identical PDFs remain separate records.</p>
+        </div>
+      `;
+    }
+
+    GROUPS.forEach(group => elements.group.insertAdjacentHTML('beforeend', `<option value="${esc(group)}">${esc(group)}</option>`));
+    elements.search.addEventListener('input', applyFilter);
+    elements.select.addEventListener('change', () => activate(elements.select.value));
+    elements.group.addEventListener('change', render);
+    elements.previous.addEventListener('click', () => move(-1));
+    elements.next.addEventListener('click', () => move(1));
+    window.addEventListener('hashchange', () => { const id = idFromHash(); if (id) activate(id, false); });
+    window.addEventListener('keydown', event => {
+      if (event.target.matches('input, select, textarea')) return;
+      if (event.key === 'ArrowLeft') move(-1);
+      if (event.key === 'ArrowRight') move(1);
+      if (event.key === '/') { event.preventDefault(); elements.search.focus(); }
+    });
+
+    renderNavigation();
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Literature review · citation review</title>
+<style>
+:root{color-scheme:light;--ink:#162b21;--muted:#5f7167;--line:#cbd9cf;--green:#17684b;--pale:#e8f3eb;--bg:#edf3ee;--paper:#fffefa;--gold:#9a6319}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,sans-serif}
+button,input,textarea{font:inherit}button{cursor:pointer}a{color:var(--green)}
+header{position:sticky;top:0;z-index:30;background:#fcfefbf5;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.head{max-width:1480px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font:700 1.1rem Georgia,serif;margin-right:auto}.subtle{font-size:.82rem;color:var(--muted)}
+.button,button{border:1px solid var(--line);border-radius:7px;background:white;padding:7px 10px;color:var(--ink)}
+button:hover,.button:hover{border-color:#7ea68e;background:#f8fcf9}.primary{background:var(--green);border-color:var(--green);color:white}.primary:hover{background:#12573e;color:white}
+.layout{max-width:1480px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,350px);gap:18px;padding:20px}
+.main{min-width:0}.intro{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:15px 18px;margin-bottom:17px}
+.intro h1{font:700 1.35rem Georgia,serif;margin:0 0 6px}.intro p{margin:5px 0;color:var(--muted)}
+.paper-page{position:relative;width:min(100%,892px);margin:0 auto 22px;background:white;box-shadow:0 4px 22px #12352321;border:1px solid #dae2da;container-type:inline-size}
+.paper-page img{display:block;width:100%;height:auto}.text-line,.cite-hit{position:absolute;display:block;white-space:nowrap;overflow:hidden;color:transparent;line-height:1;z-index:1;cursor:text}
+.text-line::selection{background:#e6ac41a0;color:transparent}.text-line.selected-line{outline:2px solid #3d9a68;outline-offset:2px;background:#2ca4631d}
+.cite-hit{z-index:3;background:#e8a84933;border-radius:2px;cursor:help;outline:1px solid transparent}
+.cite-hit:hover,.cite-hit:focus-visible{background:#eaa63a88;outline-color:#9a6319}.cite-hit.reviewed{background:#4bb77755}
+.cite-hit.removed{background:#f2a3a3a8;outline:2px solid #a4483e}.cite-hit.removed::after{content:'×';position:absolute;inset:0;color:#8d281f;background:#fff8f0b0;text-align:center;font:700 1rem/1 system-ui}
+.page-label{position:absolute;right:7px;top:7px;background:#fffffff0;padding:3px 7px;border:1px solid var(--line);border-radius:4px;font-size:.69rem;color:var(--muted);z-index:4}
+.side{position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px}
+.side h2{font:700 1.1rem Georgia,serif;margin:0 0 9px}.side h3{font-size:.93rem;margin:18px 0 7px}.side p{margin:7px 0}.side label{display:block;font-weight:650;font-size:.83rem;margin:10px 0 5px}
+.side textarea,.side input[type=search],.side input[type=text]{width:100%;padding:8px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--ink)}
+.side textarea{min-height:76px;resize:vertical}.selected{padding:9px;background:var(--pale);border-radius:6px;max-height:126px;overflow:auto;font-size:.84rem}
+.search-row{display:flex}.side .search-row input{border-radius:6px 0 0 6px;min-width:0}.search-row button{border-radius:0 6px 6px 0;border-left:0;font-size:1.15rem;min-width:37px}
+.results{max-height:min(45vh,380px);overflow:auto;border:1px solid var(--line);border-radius:6px;margin-top:7px;background:white}.results[hidden]{display:none}.results-head{position:sticky;top:0;z-index:1;padding:6px 9px;background:#f4f8f4;border-bottom:1px solid var(--line);font-size:.75rem;color:var(--muted)}.result{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #e3ebe5;border-radius:0;font-size:.8rem;padding:7px 9px}
+.result.active{background:#d7eee0}.result small{display:block;color:var(--muted)}
+.citation-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.citation-chip{display:inline-flex;align-items:center;max-width:100%;gap:5px;padding:3px 4px 3px 8px;border:1px solid #9fc5aa;border-radius:999px;background:var(--pale);font-size:.78rem}.citation-chip span{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.citation-chip button{border:0;border-radius:50%;background:transparent;color:#7c2d24;font-weight:700;padding:0 5px;line-height:1.2}.citation-chip button:hover{background:#f1cfca}
+.row{display:flex;gap:7px;flex-wrap:wrap;align-items:center}.count{font-size:.8rem;color:var(--muted)}
+.side [data-verdict].active{background:var(--pale);border-color:var(--green);color:var(--green);font-weight:700}
+.popup{position:fixed;z-index:50;width:min(390px,calc(100vw - 20px));max-height:min(470px,75vh);overflow:auto;background:#fffefa;border:1px solid #b4cdbb;box-shadow:0 12px 35px #102a1e4d;border-radius:9px;padding:12px 14px;font-size:.79rem;pointer-events:none}
+.popup[hidden]{display:none}.popup h3{font-size:.9rem;margin:0 0 6px}.popup p{margin:5px 0}.popup .report{border-top:1px solid var(--line);padding-top:7px;margin-top:7px}.popup .report strong{display:block;color:var(--green);margin-top:6px}
+.warning{color:#975d14}.good{color:#136343}.record{border:1px solid var(--line);border-radius:6px;padding:9px;margin:8px 0;font-size:.84rem}.record button{font-size:.75rem;padding:4px 6px;margin-right:5px}.record .active{background:var(--pale);border-color:var(--green)}
+.divider{border:0;border-top:1px solid var(--line);margin:16px 0}.hint{font-size:.78rem;color:var(--muted)}.hidden{display:none!important}
+@media(max-width:1000px){.layout{grid-template-columns:1fr}.side{position:static;max-height:none}.paper-page{margin-left:0}}
+</style>
+<script>const DATA=__REVIEW_DATA__;</script>
+</head>
+<body>
+<header><div class="head">
+<div class="brand">Manuscript citation review <span class="subtle">· Draft 3 PDF</span></div>
+<a class="button" href="../index.html">Research tools</a>
+<label class="subtle">PDF page <input id="pageJump" type="number" min="1" max="50" value="1" style="width:55px;padding:5px;border:1px solid var(--line);border-radius:5px"></label><button id="goPage">Go</button>
+<button id="export">Save review JSON</button>
+<label class="button">Import JSON<input id="import" type="file" accept="application/json" hidden></label>
+<span class="count" id="savedCount"></span>
+</div></header>
+<div class="layout">
+<main class="main">
+<div class="intro"><h1>Review the rendered paper</h1>
+<p id="snapshot" class="subtle"></p>
+<p>Hover over a highlighted superscript to compare the PDF citation with the current reference list and read its ASD report excerpt. Click the superscript to record a judgment. The preview helps you check a claim; it does not verify it automatically.</p>
+<p>Select words or click a line of manuscript text, then choose as many sources as needed. Each choice attaches immediately and can be removed with ×. Additions stay in this browser until you save the JSON. The PDF is a snapshot of the current rendered manuscript.</p>
+<div id="staleSession" class="record warning hidden" role="status">Your saved review belongs to an earlier PDF, reference list, or corpus index. Save its JSON before starting a new review. <button id="startNewReview" type="button">Start a new review</button></div>
+</div>
+<div id="pages"></div>
+</main>
+<aside class="side">
+<h2>Review desk</h2>
+<div id="citationDesk"><p class="hint">Click a citation in the paper to inspect it here.</p></div>
+<hr class="divider">
+<h2>Attach a reference</h2>
+<p id="selection" class="selected">Select text or click a manuscript line.</p>
+<label for="quote">Text to cite</label><textarea id="quote" placeholder="The selected text appears here"></textarea>
+<label for="search">Find a reference or paper</label>
+<div id="sourcePicker"><div class="search-row"><input id="search" type="search" role="combobox" aria-autocomplete="list" aria-controls="results" aria-expanded="false" placeholder="Author, title, DOI, or reference number"><button id="sourceToggle" type="button" aria-label="Browse all papers" aria-expanded="false" aria-controls="results">▾</button></div>
+<div id="results" class="results" role="listbox" aria-label="References and corpus papers" hidden></div></div>
+<p class="hint" id="sourceCoverage"></p><p class="hint">Choose a source to attach it immediately to the selected text. Choose more sources to build the citation list; use × to remove one.</p>
+<div id="sourcePreview" class="selected hidden"></div>
+<h3>Citations attached to this text</h3><div id="attachedCitations" class="citation-chips"></div>
+<label for="custom">Or enter a new reference</label><textarea id="custom" placeholder="Citation text, DOI, or URL"></textarea>
+<label for="note">Reason or note (optional)</label><textarea id="note" placeholder="Why this source supports the selected text"></textarea>
+<p class="row"><button class="primary" id="attach">Add custom reference</button><span class="count" id="selectedReference"></span></p>
+<hr class="divider">
+<h3>Pending citation removals</h3><div id="removals"></div>
+<p class="hint">After compiling a new PDF, refresh this static viewer from the repository root with <code>python3 'docs/Literature Review/Research Tools/paper-review/build.py'</code>, then reload this page.</p>
+<p class="hint">To apply queued removals from a newly exported review, run <code>python3 'docs/Literature Review/Research Tools/paper-review/apply_review.py' 'docs/Literature Review/vala-manuscript-citation-review.json' --apply</code>. An already-applied JSON cannot be reused.</p>
+<hr class="divider">
+<h3>Session additions</h3><div id="attachments"></div>
+<p class="hint">The JSON stores page and source locations, source hashes, citation decisions, removals, and proposed additions. Additions still require separate manuscript editing.</p>
+</aside>
+</div>
+<div class="popup" id="popup" role="tooltip" hidden></div>
+<script>
+(() => {
+'use strict';
+const $=id=>document.getElementById(id);
+const KEY='vala-manuscript-citation-review-v1';
+const references=DATA.references,corpus=DATA.corpus;
+const pdfVersion=DATA.source.pdf_sha256.slice(0,12);
+$('snapshot').textContent='PDF snapshot '+pdfVersion+' · '+DATA.pages.length+' pages. Rebuild after each PDF change.';
+let draft;
+try{draft=JSON.parse(localStorage.getItem(KEY))}catch{}
+const newReview=()=>({version:1,source:DATA.source,attachments:[],removals:[],decisions:{}});
+if(!draft||draft.version!==1)draft=newReview();
+if(!draft.source?.catalog_sha256&&draft.source?.pdf_sha256===DATA.source.pdf_sha256&&draft.source?.references_sha256===DATA.source.references_sha256)draft.source.catalog_sha256=DATA.source.catalog_sha256;
+draft.removals??=[];
+let target=null,activeCitation=null;
+const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(draft))}catch{}$('savedCount').textContent=draft.attachments.length+' additions · '+draft.removals.length+' removals · '+Object.keys(draft.decisions).length+' judgments'};
+const staleReview=()=>draft.source?.pdf_sha256!==DATA.source.pdf_sha256||draft.source?.references_sha256!==DATA.source.references_sha256
+ ||draft.source?.catalog_sha256&&draft.source.catalog_sha256!==DATA.source.catalog_sha256;
+const showSessionStatus=()=>$('staleSession').classList.toggle('hidden',!staleReview());
+const citeByPdf=new Map(references.filter(r=>r.pdf_source).map(r=>[r.pdf_source.pdf_number,r]));
+const corpusByReference=new Map(corpus.filter(w=>w.reference_number).map(w=>[w.reference_number,w]));
+const sources=[
+ ...references.map(ref=>{const work=corpusByReference.get(ref.number);return{key:'ref:'+ref.number,kind:'reference',ref,work,
+  search:[ref.number,ref.citation,ref.doi,work?.title,work?.authors,work?.doi].filter(Boolean).join(' ').toLowerCase()}}),
+ ...corpus.filter(work=>!work.reference_number).map(work=>({key:'work:'+work.id,kind:'corpus',work,
+  search:[work.id,work.title,work.authors,work.year,work.doi].filter(Boolean).join(' ').toLowerCase()}))
+].sort((a,b)=>(a.work?.title||a.ref.citation).localeCompare(b.work?.title||b.ref.citation));
+$('sourceCoverage').textContent='Search '+corpus.length+' indexed corpus works and '+references.length+' numbered references. Corpus-only papers are marked separately.';
+const reportLink=ref=>ref.report?'<a href="'+encodeURI(ref.report.pdf_href)+'" target="_blank" rel="noopener">Source PDF ↗</a> · <a href="../index.html#view=reports&id='+encodeURIComponent(ref.report.asset_id)+'" target="_blank" rel="noopener">Full ASD report ↗</a>':'No linked ASD report';
+function tooltipHTML(ref){
+ const old=ref.pdf_source;
+ return '<h3>PDF citation '+old.pdf_number+' → current reference '+ref.number+'</h3>'
+ +'<p><b>In rendered PDF:</b> '+escapeHTML(old.citation)+'</p>'
+ +'<p><b>Current list:</b> '+escapeHTML(ref.citation)+'</p>'
+ +'<p class="'+(old.status==='DOI conflict'||old.status.includes('differs')?'warning':'good')+'">'+escapeHTML(old.status)+'</p>'
+ +'<div class="report"><b>ASD report · '+escapeHTML(ref.report?.title||'Unavailable')+'</b>'
+ +(ref.report?'<p class="warning">'+escapeHTML(ref.report.review_status)+'</p>':'')
+ +(ref.report?.excerpt_html||'<p>No report matched this reference. Check the source directly.</p>')+'</div>';
+}
+function showPopup(ref,event){
+ $('popup').innerHTML=tooltipHTML(ref);$('popup').hidden=false;movePopup(event);
+}
+function movePopup(event){
+ const box=$('popup'),x=Number.isFinite(event.clientX)?event.clientX:innerWidth/2,y=Number.isFinite(event.clientY)?event.clientY:100;
+ box.style.left=Math.max(10,Math.min(x+16,innerWidth-box.offsetWidth-10))+'px';
+ box.style.top=Math.max(10,Math.min(y+18,innerHeight-box.offsetHeight-10))+'px';
+}
+function hidePopup(){$('popup').hidden=true}
+function selectText(page,line,index,quote){
+ document.querySelectorAll('.selected-line').forEach(el=>el.classList.remove('selected-line'));
+ line.classList.add('selected-line');
+ target={page:page.number,line_index:index,line_text:page.lines[index].text,
+         bbox:{left:page.lines[index].left,top:page.lines[index].top,width:page.lines[index].width,height:page.lines[index].height}};
+ $('quote').value=quote||target.line_text;
+ $('selection').textContent='Page '+page.number+' · line '+(index+1)+': '+target.line_text;
+ renderAttachments();
+ $('search').focus();
+}
+function drawPages(){
+ const parent=$('pages'),frag=document.createDocumentFragment();
+ for(const page of DATA.pages){
+  const div=document.createElement('div');div.className='paper-page';div.dataset.page=page.number;
+  div.id='page-'+page.number;
+  div.style.aspectRatio=page.width+'/'+page.height;
+  const img=document.createElement('img');img.src='pages/page-'+String(page.number).padStart(2,'0')+'.jpg?v='+pdfVersion;img.loading=page.number<3?'eager':'lazy';img.alt='Rendered manuscript page '+page.number;div.appendChild(img);
+  const label=document.createElement('span');label.className='page-label';label.textContent='PDF page '+page.number;div.appendChild(label);
+  page.lines.forEach((line,index)=>{
+   if(line.width<1||line.height<1)return;
+   const span=document.createElement('span');span.className=line.citation?'cite-hit':'text-line';
+   span.style.left=line.left/page.width*100+'%';span.style.top=line.top/page.height*100+'%';
+   span.style.width=Math.max(line.width/page.width*100,.7)+'%';span.style.height=Math.max(line.height/page.height*100,.8)+'%';
+   span.style.fontSize=(line.height/page.width*100)+'cqw';
+   span.textContent=line.text;
+   span.dataset.page=page.number;span.dataset.line=index;
+   if(line.citation){
+    span.dataset.texOffset=line.source.offset;
+    const ref=citeByPdf.get(line.citation);
+    if(ref){
+     span.tabIndex=0;span.setAttribute('aria-label','Citation '+line.citation+', current reference '+ref.number);
+     span.addEventListener('mouseenter',e=>showPopup(ref,e));span.addEventListener('mousemove',movePopup);
+     span.addEventListener('mouseleave',hidePopup);span.addEventListener('focus',e=>showPopup(ref,e));
+     span.addEventListener('blur',hidePopup);span.addEventListener('click',()=>openCitation(ref,page.number,line));
+    }
+   }else{
+    span.addEventListener('mouseup',()=>{
+     const selection=window.getSelection();const selected=selection?.toString().trim();
+     selectText(page,span,index,selected&&selection?.anchorNode?.parentElement===span?selected:line.text);
+    });
+   }
+   div.appendChild(span);
+  });
+  frag.appendChild(div);
+ }
+ parent.appendChild(frag);
+}
+function openCitation(ref,page,line){
+ activeCitation={ref,page,tex_offset:line.source.offset,bbox:{left:line.left,top:line.top,width:line.width,height:line.height}};
+ const state=draft.decisions[ref.pdf_source.pdf_number]||{};
+ $('citationDesk').innerHTML='<p><b>PDF '+ref.pdf_source.pdf_number+' → list '+ref.number+'</b> · page '+page+'</p>'
+ +'<p>'+escapeHTML(ref.citation)+'</p><p>'+reportLink(ref)+'</p>'
+ +'<p class="hint">The hover preview gives the PDF bibliography text and an ASD report excerpt.</p>'
+ +'<div class="row">'+['correct','needs correction','uncertain'].map(v=>'<button data-verdict="'+v+'" class="'+(state.verdict===v?'active':'')+'">'+v+'</button>').join('')+'</div>'
+ +'<label for="citationNote">Review note</label><textarea id="citationNote">'+escapeHTML(state.note||'')+'</textarea>'
+ +'<button id="saveJudgment">Save judgment</button>'
+ +'<hr class="divider"><p class="hint">This occurrence is at LaTeX line '+line.source.tex_line+'. Other uses of this reference are unaffected.</p>'
+ +'<button id="toggleRemoval" type="button">'+(draft.removals.some(x=>x.tex_offset===line.source.offset)?'Restore this citation':'Queue removal of this citation')+'</button>';
+ $('citationDesk').querySelectorAll('[data-verdict]').forEach(b=>b.onclick=()=>{
+  $('citationDesk').querySelectorAll('[data-verdict]').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+ });
+ $('saveJudgment').onclick=()=>{
+  const verdict=$('citationDesk').querySelector('[data-verdict].active')?.dataset.verdict||'uncertain';
+  draft.decisions[ref.pdf_source.pdf_number]={pdf_number:ref.pdf_source.pdf_number,tex_key:ref.pdf_source.tex_key,
+   current_number:ref.number,verdict,note:$('citationNote').value.trim(),page,bbox:activeCitation.bbox};
+  save();document.querySelectorAll('.cite-hit').forEach(el=>{if(Number(el.textContent)===ref.pdf_source.pdf_number)el.classList.add('reviewed')});
+ };
+ $('toggleRemoval').onclick=()=>{
+  const offset=line.source.offset,index=draft.removals.findIndex(x=>x.tex_offset===offset);
+  if(index>=0)draft.removals.splice(index,1);
+  else draft.removals.push({tex_offset:offset,token:line.source.token,tex_key:line.source.tex_key,
+   tex_line:line.source.tex_line,pdf_number:ref.pdf_source.pdf_number,current_number:ref.number,
+   page,bbox:activeCitation.bbox,created_at:new Date().toISOString()});
+  $('toggleRemoval').textContent=index>=0?'Queue removal of this citation':'Restore this citation';
+  renderRemovals();save();
+ };
+}
+function renderRemovals(){
+ const offsets=new Set(draft.removals.map(item=>item.tex_offset));
+ document.querySelectorAll('.cite-hit').forEach(el=>el.classList.toggle('removed',offsets.has(Number(el.dataset.texOffset))));
+ $('removals').innerHTML=draft.removals.map((item,index)=>'<div class="record"><b>Page '+item.page+' · PDF '+item.pdf_number+'</b> · source line '+item.tex_line
+  +'<p>'+escapeHTML(item.token)+'</p><button type="button" data-restore="'+index+'">Restore</button></div>').join('')||'<p class="hint">No citations queued for removal.</p>';
+ $('removals').querySelectorAll('[data-restore]').forEach(button=>button.onclick=()=>{
+  const item=draft.removals.splice(Number(button.dataset.restore),1)[0];
+  if(activeCitation?.tex_offset===item.tex_offset){
+   const toggle=$('toggleRemoval');if(toggle)toggle.textContent='Queue removal of this citation';
+  }
+  renderRemovals();save();
+ });
+}
+function resultList(){
+ const query=$('search').value.trim().toLowerCase();
+ const hits=query?sources.filter(item=>item.search.includes(query)):sources;
+ $('results').innerHTML='<div class="results-head">'+hits.length+' of '+sources.length+' sources · scroll to browse all</div>'+(hits.length?hits.map(item=>{
+  const ref=item.ref,work=item.work;
+  const attached=target&&draft.attachments.some(entry=>sameTarget(entry)&&referenceKey(entry.reference)===item.key);
+  const label=ref?'<b>'+ref.number+'.</b> '+escapeHTML(ref.citation.slice(0,190)):escapeHTML(work.title);
+  const detail=ref?(work?'Numbered reference · corpus paper':'Numbered reference'):
+   'Corpus-only paper · not in reference list'+(work.year?' · '+work.year:'')+(work.doi?' · '+work.doi:'');
+  return '<button type="button" role="option" aria-selected="'+Boolean(attached)+'" class="result '+(attached?'active':'')+'" data-source="'+item.key+'">'+label+'<small>'+escapeHTML(detail)+(attached?' · attached':'')+'</small></button>';
+ }).join(''):'<p class="hint">No matching source. Enter a new citation below.</p>');
+ $('results').querySelectorAll('[data-source]').forEach(b=>b.onclick=()=>{
+  const source=sources.find(item=>item.key===b.dataset.source);
+  const ref=source.ref,work=source.work,report=ref?.report||work?.report;
+  $('sourcePreview').classList.remove('hidden');
+  $('sourcePreview').innerHTML='<b>'+escapeHTML(ref?ref.citation:work.title)+'</b>'
+   +(work?.doi?'<p>DOI: '+escapeHTML(work.doi)+'</p>':'')
+   +(report?'<p>'+reportLink({report})+'</p>'+report.excerpt_html:'<p>No local ASD report matched this source.</p>');
+  addAttachment(sourceReference(source));
+  closeResults();
+ });
+}
+function openResults(){resultList();$('results').hidden=false;$('search').setAttribute('aria-expanded','true');$('sourceToggle').setAttribute('aria-expanded','true')}
+function closeResults(){$('results').hidden=true;$('search').setAttribute('aria-expanded','false');$('sourceToggle').setAttribute('aria-expanded','false')}
+function sourceReference(source){
+ if(source.kind==='reference')return{type:'existing',number:source.ref.number,citation:source.ref.citation,work_id:source.work?.id||null};
+ const work=source.work;
+ return{type:'corpus',work_id:work.id,title:work.title,authors:work.authors,year:work.year,doi:work.doi,
+  report_asset_id:work.report?.asset_id||null,
+  citation:work.title+(work.year?' ('+work.year+')':'')+(work.doi?'. doi:'+work.doi:'')};
+}
+function referenceKey(ref){return ref.type==='existing'?'ref:'+ref.number:ref.type==='corpus'?'work:'+ref.work_id:'new:'+ref.citation.trim().toLowerCase()}
+function sameTarget(item){return target&&item.page===target.page&&item.line_index===target.line_index&&item.quote===$('quote').value.trim()}
+function addAttachment(ref){
+ const quote=$('quote').value.trim();
+ if(!target||!quote){alert('Select text or click a manuscript line first.');return false}
+ if(draft.attachments.some(item=>sameTarget(item)&&referenceKey(item.reference)===referenceKey(ref))){
+  $('selectedReference').textContent='Already attached to this text';return false;
+ }
+ draft.attachments.push({page:target.page,line_index:target.line_index,line_text:target.line_text,bbox:target.bbox,
+ quote,reference:ref,note:$('note').value.trim(),created_at:new Date().toISOString()});
+ $('note').value='';save();renderAttachments();resultList();
+ return true;
+}
+function citationChip(item,index){
+ const ref=item.reference,label=ref.type==='existing'?'#'+ref.number+' '+ref.citation:ref.type==='corpus'?ref.title:ref.citation;
+ return '<span class="citation-chip" title="'+escapeHTML(label)+'"><span>'+escapeHTML(label)+'</span>'
+  +'<button type="button" data-delete="'+index+'" aria-label="Remove citation '+escapeHTML(label)+'">×</button></span>';
+}
+function bindDeleteButtons(parent){
+ parent.querySelectorAll('[data-delete]').forEach(button=>button.onclick=()=>{
+  draft.attachments.splice(Number(button.dataset.delete),1);save();renderAttachments();resultList();
+ });
+}
+function renderAttachments(){
+ const groups=new Map();
+ draft.attachments.forEach((item,index)=>{
+  const key=JSON.stringify([item.page,item.line_index,item.quote]);
+  if(!groups.has(key))groups.set(key,[]);
+  groups.get(key).push({item,index});
+ });
+ $('attachments').innerHTML=[...groups.values()].map(group=>'<div class="record"><b>Page '+group[0].item.page+' · line '+(group[0].item.line_index+1)+'</b>'
+  +'<p>'+escapeHTML(group[0].item.quote.slice(0,120))+'</p><div class="citation-chips">'
+  +group.map(({item,index})=>citationChip(item,index)).join('')+'</div></div>').join('')||'<p class="hint">No additions yet.</p>';
+ const selected=draft.attachments.map((item,index)=>({item,index})).filter(({item})=>sameTarget(item));
+ $('attachedCitations').innerHTML=selected.map(({item,index})=>citationChip(item,index)).join('')||'<span class="hint">No citations attached to this text yet.</span>';
+ $('selectedReference').textContent=selected.length+' attached to this text';
+ bindDeleteButtons($('attachments'));bindDeleteButtons($('attachedCitations'));
+}
+$('search').addEventListener('focus',openResults);
+$('search').addEventListener('click',openResults);
+$('search').addEventListener('input',()=>{$('sourcePreview').classList.add('hidden');openResults()});
+$('quote').addEventListener('input',()=>{renderAttachments();resultList()});
+$('sourceToggle').onclick=()=>{if(!$('results').hidden){closeResults();return}$('search').value='';openResults();$('search').focus()};
+$('sourcePicker').addEventListener('keydown',event=>{
+ const options=[...$('results').querySelectorAll('[data-source]')];
+ if(event.key==='Escape'){closeResults();$('search').focus();return}
+ if(event.key==='ArrowDown'||event.key==='ArrowUp'){
+  event.preventDefault();if($('results').hidden)openResults();
+  const index=options.indexOf(document.activeElement),next=event.key==='ArrowDown'?Math.min(index+1,options.length-1):Math.max(index-1,0);
+  options[next]?.focus();
+ }else if(event.key==='Enter'&&document.activeElement===$('search')&&!$('results').hidden){event.preventDefault();options[0]?.click()}
+});
+document.addEventListener('click',event=>{if(!$('sourcePicker').contains(event.target))closeResults()});
+$('attach').onclick=()=>{
+ const custom=$('custom').value.trim();
+ if(!custom){alert('Enter a new reference first, or choose a source from the dropdown.');return}
+ if(addAttachment({type:'new',citation:custom}))$('custom').value='';
+};
+$('export').onclick=()=>{
+ const blob=new Blob([JSON.stringify(draft,null,2)+'\n'],{type:'application/json'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='vala-manuscript-citation-review.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+$('import').onchange=async event=>{
+ const file=event.target.files?.[0];if(!file)return;
+ try{
+  const value=JSON.parse(await file.text());
+  if(value.version!==1||!Array.isArray(value.attachments)||typeof value.decisions!=='object'||value.removals&&!Array.isArray(value.removals))throw Error('Invalid review format');
+  if((value.source?.pdf_sha256!==DATA.source.pdf_sha256||value.source?.references_sha256!==DATA.source.references_sha256
+    ||value.source?.catalog_sha256&&value.source.catalog_sha256!==DATA.source.catalog_sha256)
+    &&!confirm('This review was made against a different PDF or reference list. Import anyway?'))return;
+  draft=value;draft.removals??=[];save();renderAttachments();renderRemovals();showSessionStatus();
+ }catch(error){alert('Could not import review JSON: '+error.message)}
+ event.target.value='';
+};
+$('startNewReview').onclick=()=>{
+ if(!confirm('Start a new review for this PDF? Save the old review JSON first; this clears the browser-saved decisions.'))return;
+ draft=newReview();target=null;activeCitation=null;
+ $('quote').value='';$('note').value='';$('custom').value='';
+ $('selection').textContent='Select text or click a manuscript line.';
+ $('selection').classList.remove('warning');
+ $('citationDesk').innerHTML='<p class="hint">Click a citation in the paper to inspect it here.</p>';
+ document.querySelectorAll('.cite-hit').forEach(el=>el.classList.remove('reviewed'));
+ save();renderAttachments();renderRemovals();resultList();showSessionStatus();
+};
+const jump=()=>{const page=Number($('pageJump').value);if(Number.isInteger(page)&&page>=1&&page<=DATA.pages.length)document.getElementById('page-'+page).scrollIntoView({behavior:'smooth'})};
+$('goPage').onclick=jump;$('pageJump').onkeydown=e=>{if(e.key==='Enter')jump()};
+$('pageJump').max=DATA.pages.length;
+showSessionStatus();drawPages();resultList();renderAttachments();renderRemovals();save();
+})();
+</script>
+</body>
+</html>
